@@ -184,6 +184,9 @@ if __name__ == "__main__":
         index_filename_list = fa.filter_frameanalysis_files(key,".buf")
 
         for index_filename in index_filename_list:
+            # 这个Buffer是dump下来的，基础的3Dmigoto没有这个功能，我加上去的
+            # 可以在这个issue中看到具体添加方法：
+            # https://github.com/bo3b/3Dmigoto/issues/356#issuecomment-2683749651
             if "-drawindexedinstancedindirect=" in index_filename:
                 print(index_filename)
                 index_filepath = fa.frameanalysis_folder_path + "\\" + index_filename
@@ -217,8 +220,12 @@ if __name__ == "__main__":
         那么问题来了，这些不同的Index使用了不同的VS值，是否意味着每一个VS中的内容都不同呢
         如果不同，是不是每一个类型的Shader都需要写单独的解析逻辑？
         所以接下来需要开游戏测试，先dump几个vs看看内容是否相同。
-        '''
 
+        初步推测可能是一部分VS负责位置Position和Blend信息，一部分Shader负责TANGENT、Normal信息
+        一部分Shader负责UV贴图，当然这个只是猜测，具体还得进游戏Dump Shader来查看。
+        '''
+        
+    
 
 
 
