@@ -1,4 +1,6 @@
 import os
+import numpy as np
+
 
 class LogLine:
     index:str = ""
@@ -14,12 +16,42 @@ class LogLine:
         # 提取第一个空格之后的内容作为 call
         self.call = log_line[first_space_index + 1:]
 
+class PBufferForArgs:
+    # 所有参数都是UINT类型的，这里用INT代替因为数值不会特别大
+    IndexCountPerInstance:int = 0
+    InstanceCount:int = 0
+    StartIndexLocation:int = 0
+    BaseVertexLocation:int = 0
+    StartInstanceLocation:int = 0
+
+    def __init__(self,buf_file_path:str,AlignedByteOffsetForArgs:int) -> None:
+        numberlist = np.fromfile(index_filepath, dtype=np.uint32).tolist()
+        offset:int = int(AlignedByteOffsetForArgs / 20 * 5) 
+        # print(offset)
+        # print(numberlist)
+        # print(numberlist[offset*5:offset*5 + 5])
+        self.IndexCountPerInstance = numberlist[offset]
+        self.InstanceCount = numberlist[offset + 1]
+        self.StartIndexLocation = numberlist[offset + 2]
+        self.BaseVertexLocation = numberlist[offset + 3]
+        self.StartInstanceLocation = numberlist[offset + 4]
+        
+    def __str__(self) -> str:
+        # 返回类的属性信息字符串
+        return (
+            f"IndexCountPerInstance: {self.IndexCountPerInstance}\n"
+            f"InstanceCount: {self.InstanceCount}\n"
+            f"StartIndexLocation: {self.StartIndexLocation}\n"
+            f"BaseVertexLocation: {self.BaseVertexLocation}\n"
+            f"StartInstanceLocation: {self.StartInstanceLocation}"
+        )
 
 class DrawIndexedInstancedIndirect:
 
-    pBufferForArgs:str = ""
+    pBufferForArgs_str:str = ""
     AlignedByteOffsetForArgs:int = 0
     hash_value:str = ""
+    pBufferForArgs:PBufferForArgs = None
 
     def __init__(self, call_str: str) -> None:
         # 找到括号内的内容
@@ -37,7 +69,7 @@ class DrawIndexedInstancedIndirect:
         # 提取 pBufferForArgs
         if len(args) < 2 or not args[0].startswith("pBufferForArgs:"):
             raise ValueError("输入字符串格式不正确，无法解析 pBufferForArgs")
-        self.pBufferForArgs = args[0].split(":")[1].strip()
+        self.pBufferForArgs_str = args[0].split(":")[1].strip()
         
         # 提取 AlignedByteOffsetForArgs
         if not args[1].startswith("AlignedByteOffsetForArgs:"):
@@ -51,7 +83,7 @@ class DrawIndexedInstancedIndirect:
         self.hash_value = call_str[hash_start + 5:].strip()
 
     def __str__(self):
-        return (f"pBufferForArgs: {self.pBufferForArgs}, "
+        return (f"pBufferForArgs: {self.pBufferForArgs_str}, "
                 f"AlignedByteOffsetForArgs: {self.AlignedByteOffsetForArgs}, "
                 f"hash_value: {self.hash_value}")
 
@@ -77,18 +109,40 @@ class FrameAnalysis:
                 draw_ib_index_list.append(logline.index)
                 # print(logline.index)
         return draw_ib_index_list
+    
+    def filter_frameanalysis_files(self,contains_str:str,suffix_str:str) -> list[str]:
+        filtered_filename_list = []
+        for frameanalysis_file in os.listdir(self.frameanalysis_folder_path):
+            # print(frameanalysis_file)
+            if contains_str in frameanalysis_file and frameanalysis_file.endswith(suffix_str):
+                filtered_filename_list.append(frameanalysis_file)
 
+        return filtered_filename_list
+    
+    def filter_first_frameanalysis_file(self,contains_str:str,suffix_str:str) -> str:
+        filter_list = self.filter_frameanalysis_files(contains_str=contains_str,suffix_str=suffix_str)
+        return filter_list[0]
+    
+    def filter_files(self,filter_folder:str,contains_str:str,suffix_str:str) -> list[str]:
+        filtered_filename_list = []
+        for filename in os.listdir(filter_folder):
+            # print(frameanalysis_file)
+            if contains_str in filename and filename.endswith(suffix_str):
+                filtered_filename_list.append(filename)
+
+        return filtered_filename_list
 
 
 if __name__ == "__main__":
     # 解限机-机甲-测试
-    frameanalysis_folder = r"C:\Users\Administrator\Desktop\net8.0-windows10.0.22621.0\Games\Game001\3Dmigoto\FrameAnalysis-2025-02-25-171130"
+    frameanalysis_folder = r"C:\Users\Administrator\Desktop\net8.0-windows10.0.22621.0\Games\Game001\3Dmigoto\FrameAnalysis-2025-02-26-101855"
     fa = FrameAnalysis(frameanalysis_folder)
 
     draw_ib = "c3ddbf5a"
 
     draw_ib_index_list = fa.get_index_list_by_drawib(draw_ib=draw_ib)
 
+    index_drawcall_dict:dict[str,DrawIndexedInstancedIndirect] = {}
     for line in fa.log_lines:
         logline = LogLine(line)
 
@@ -96,7 +150,7 @@ if __name__ == "__main__":
             drawcall = DrawIndexedInstancedIndirect(logline.call)
 
             if logline.index in draw_ib_index_list:
-                print(drawcall)
+                # print(drawcall)
                 '''
                 观察可以发现，不止一个Hash值，调用DrawIndexedInstancedIndirect传入的参数
                 
@@ -113,6 +167,61 @@ if __name__ == "__main__":
                 把这个DrawIndexedInstancedIndirect的参数的Hash值中的内容Dump出来。
 
                 
+                
                 '''
+                index_drawcall_dict[logline.index] = drawcall
+
+    # 之前我们在d3d11.dll中实现了dump DrawIndexedInstancedIndirect的参数，现在可以直接解析Buffer文件来读取参数
+    # 后续这些参数的值，配合Shader中的逻辑，以及偏移量对应的参数，就能正确的知道传递到Shader里的v开头的变量的内容是什么了。
+
+    # 现在根据这些Index来找对应的Buffer，然后看一下里面的内容都有什么，看一下里面的内容是否都一样。
+    # -drawindexedinstancedindirect=
+    # index_count = 0
+    
+    index_fulldrawcall_dict:dict[str:DrawIndexedInstancedIndirect] = {}
+    for key, value in index_drawcall_dict.items():
+        print("index:" + key + " drawcall" + str(value))
+        index_filename_list = fa.filter_frameanalysis_files(key,".buf")
+
+        for index_filename in index_filename_list:
+            if "-drawindexedinstancedindirect=" in index_filename:
+                print(index_filename)
+                index_filepath = fa.frameanalysis_folder_path + "\\" + index_filename
+
+                pBufferForArgs = PBufferForArgs(index_filepath,value.AlignedByteOffsetForArgs)
+                print(str(pBufferForArgs))
+                value.pBufferForArgs = pBufferForArgs
+
+                index_fulldrawcall_dict[key] = value
+            
+        # index_count += 1
+        # if index_count > 5:
+        #     break
+        print("-------------------------------------------------------------------")
+
+    # 测试完了，确实可以拿到具体的pBufferForArgs参数，接下来的内容就是逆向Shader，根据Shader中对这几个参数的处理，模拟Shader的处理方式
+    # 从vs-t0到vs-t6中读取数据，提取出对应偏移段的模型。
+    # 正常情况下，我们用到的参数应该只有InndexCountPerInstance和InstanceCount，其它的参数应该都为0。
+
+    for index, drawcall in index_drawcall_dict.items():
+        first_ib_file = fa.filter_first_frameanalysis_file(index + "-ib=",".buf")
+        print(first_ib_file)
+        '''
+        000051-ib=c3ddbf5a-vs=bbbc0e987083d940-ps=c40ab7467e0b3b5c.buf
+        000052-ib=c3ddbf5a-vs=bbbc0e987083d940-ps=241011bfadb9d50d.buf
+        000053-ib=c3ddbf5a-vs=82d10c405be5974f-ps=7d72979950459e0e.buf
+        000054-ib=c3ddbf5a-vs=bbbc0e987083d940-ps=c40ab7467e0b3b5c.buf
+        000055-ib=c3ddbf5a-vs=fb413544c99a69f3-ps=41abdb8cc400c7b7.buf
+        000056-ib=c3ddbf5a-vs=bbbc0e987083d940-ps=c40ab7467e0b3b5c.buf
+
+        那么问题来了，这些不同的Index使用了不同的VS值，是否意味着每一个VS中的内容都不同呢
+        如果不同，是不是每一个类型的Shader都需要写单独的解析逻辑？
+        所以接下来需要开游戏测试，先dump几个vs看看内容是否相同。
+        '''
+
+
+
+
+
 
     print("ok")
