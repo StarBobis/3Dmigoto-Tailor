@@ -1,0 +1,3267 @@
+
+vs_5_0
+dcl_globalFlags refactoringAllowed
+dcl_constantbuffer CB0[3], immediateIndexed
+dcl_constantbuffer CB1[179], immediateIndexed
+dcl_constantbuffer CB2[1], immediateIndexed
+dcl_constantbuffer CB3[62], immediateIndexed
+dcl_sampler s0, mode_default
+dcl_resource_raw t0
+dcl_resource_raw t1
+dcl_resource_raw t2
+dcl_resource_raw t3
+dcl_resource_texture2darray (float,float,float,float) t4
+dcl_resource_structured t5, 4
+dcl_resource_structured t6, 4
+dcl_resource_raw t7
+dcl_resource_structured t8, 36
+dcl_resource_structured t9, 96
+dcl_input v0.xyz
+dcl_input v1.xyz
+dcl_input v2.xyzw
+dcl_input v3.xyzw
+dcl_input v4.xyzw
+dcl_input v5.xyzw
+dcl_input v6.xyzw
+dcl_input_sgv v7.x, instance_id
+dcl_input_sgv v8.x, vertex_id
+dcl_output_siv o0.xyzw, position
+dcl_output o1.xyzw
+dcl_output o2.xyzw
+dcl_output o3.xyzw
+dcl_output o4.xyzw
+dcl_output o5.xyzw
+dcl_output o6.xyzw
+dcl_output o7.xyzw
+dcl_output o8.x
+dcl_output o8.y
+dcl_temps 54
+dcl_indexableTemp x0[7], 4
+dcl_indexableTemp x1[21], 4
+dcl_indexableTemp x2[4], 4
+dcl_indexableTemp x3[21], 4
+dcl_indexableTemp x4[4], 4
+dcl_indexableTemp x5[21], 4
+dcl_indexableTemp x6[4], 4
+dcl_indexableTemp x7[4], 4
+ine r0.x, cb1[178].w, l(0)
+lt r0.y, l(0.000000), cb3[61].z
+and r0.x, r0.y, r0.x
+if_nz r0.x
+  mov o0.xyzw, l(0,0,0,0)
+  mov o1.xyzw, l(0,0,0,0)
+  mov o2.xyzw, l(0,0,0,0)
+  mov o3.xyzw, l(0,0,0,0)
+  mov o4.xyzw, l(0,0,0,0)
+  mov o5.xyzw, l(0,0,0,0)
+  mov r0.xyzw, l(0,0,0,0)
+  mov r1.xyzw, l(0,0,0,0)
+  mov r2.xy, l(0,0,0,0)
+else
+  iadd r2.z, v7.x, cb2[0].x
+  ld_structured_indexable(structured_buffer, stride=4)(mixed,mixed,mixed,mixed) r2.w, cb0[2].y, l(0), t5.xxxx
+  iadd r2.z, r2.z, r2.w
+  ld_structured_indexable(structured_buffer, stride=4)(mixed,mixed,mixed,mixed) r2.z, r2.z, l(0), t6.xxxx
+  imul null, r2.w, r2.z, l(12)
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r3.xy, r2.w, t1.xyxx
+  ishl r2.z, r2.z, l(3)
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r2.zw, r2.z, t1.xxxy
+  movc r2.zw, cb0[2].zzzz, r3.xxxy, r2.zzzw
+  and r3.x, r2.w, l(0x00ffffff)
+  ushr r3.yz, r2.zzwz, l(0, 16, 24, 0)
+  imul null, r2.z, r3.x, l(176)
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r4.xyzw, r2.z, t2.xyzw
+  imad r5.xyzw, r3.xxxx, l(176, 176, 176, 176), l(16, 32, 48, 64)
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r6.xyzw, r5.x, t2.xyzw
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r7.xyzw, r5.y, t2.xyzw
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r5.xyz, r5.z, t2.xyzx
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r8.xyz, r5.w, t2.xyzx
+  imad r9.xy, r3.xxxx, l(176, 176, 0, 0), l(80, 144, 0, 0)
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r9.xzw, r9.x, t2.xxyz
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r10.xyz, r9.y, t2.xyzx
+  and r2.z, r10.y, l(0x7fffffff)
+  imad r11.xy, r2.zzzz, l(96, 96, 0, 0), l(32, 48, 0, 0)
+  or r11.xz, r11.xxyx, l(8, 0, 20, 0)
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r2.y, r11.x, t3.xxxx
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r3.w, r11.z, t3.xxxx
+  udiv r5.w, null, v8.x, l(3)
+  imad r8.w, r5.w, l(-3), v8.x
+  umin r9.y, r3.y, cb0[0].z
+  ishl r9.y, r9.y, l(17)
+  iadd r10.w, r3.y, -cb0[0].z
+  imax r10.w, r10.w, l(0)
+  ishl r10.w, r10.w, l(15)
+  iadd r9.y, r9.y, r10.w
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r10.w, r9.y, t0.xxxx
+  ishl r11.x, r10.w, l(4)
+  ishl r11.z, r3.z, l(4)
+  iadd r11.z, r9.y, r11.z
+  iadd r11.w, r11.z, l(16)
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r12.xyzw, r11.w, t0.xyzw
+  iadd r11.w, r11.x, r11.z
+  iadd r11.w, r11.w, l(16)
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r13.xyzw, r11.w, t0.xyzw
+  imad r11.w, r10.w, l(80), r11.z
+  iadd r11.w, r11.w, l(16)
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r14.xyzw, r11.w, t0.xyzw
+  ushr r11.w, r12.x, l(9)
+  and r15.xy, r12.ywyy, l(255, 0x0000ffff, 0, 0)
+  ubfe r16.xyzw, l(1, 5, 5, 5), l(25, 4, 9, 14), r13.wwww
+  iadd r12.x, r16.y, l(-8)
+  ushr r17.xyz, r13.wwww, l(9, 14, 19, 0)
+  ubfe r15.zw, l(0, 0, 5, 1), l(0, 0, 19, 24), r13.wwww
+  ushr r16.y, r14.x, l(22)
+  and r18.xy, r14.yxyy, l(0x003fffff, 0x003fffff, 0, 0)
+  ubfe r14.x, l(3), l(22), r14.y
+  ult r17.w, r14.w, l(0xfe000000)
+  if_nz r17.w
+    and r17.w, r14.w, l(63)
+    ubfe r19.xyz, l(6, 6, 7, 0), l(6, 12, 18, 0), r14.wwww
+    iadd r20.x, r19.z, l(1)
+    ushr r20.y, r14.w, l(25)
+    mov r18.zw, l(0,0,0,0)
+  else
+    and r18.z, r14.w, l(0x0007ffff)
+    ubfe r14.w, l(6), l(19), r14.w
+    iadd r18.w, r14.w, l(1)
+    mov r17.w, l(0)
+    mov r20.xy, l(0,0,0,0)
+    mov r19.xy, l(0,0,0,0)
+  endif
+  if_nz r16.x
+    imad r10.w, r10.w, l(112), r11.z
+    iadd r10.w, r10.w, l(16)
+    ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r21.xyzw, r10.w, t0.xyzw
+    movc r21.xyzw, r16.xxxx, r21.yxzw, l(0,0,0,0)
+    ishl r10.w, r11.x, l(3)
+    iadd r10.w, r10.w, r11.z
+    iadd r10.w, r10.w, l(16)
+    ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r11.xz, r10.w, t0.xxyx
+    movc r11.xz, r16.xxxx, r11.xxzx, l(0,0,0,0)
+    and r22.x, r21.y, l(0x0000ffff)
+    ushr r22.y, r21.y, l(16)
+    and r10.w, r11.z, l(0x007fffff)
+  else
+    mov r22.xy, l(0,0,0,0)
+    mov r21.xzw, l(0,0,0,0)
+    mov r11.x, l(0)
+    mov r10.w, l(0)
+  endif
+  ult r11.z, r5.w, r15.x
+  if_nz r11.z
+    if_nz r20.x
+      ult r11.z, r5.w, r20.x
+      iadd r14.w, r20.y, r20.x
+      ult r14.w, r5.w, r14.w
+      movc r14.w, r14.w, r19.x, r19.y
+      movc r19.x, r11.z, r17.w, r14.w
+    else
+      ishl r11.z, r18.z, l(2)
+      iadd r11.z, r9.y, r11.z
+      mov r20.y, l(-1)
+      mov r19.xy, l(-1,0,0,0)
+      mov r14.w, r11.z
+      loop
+        uge r15.x, r19.y, r18.w
+        breakc_nz r15.x
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r15.x, r14.w, t0.xxxx
+        iadd r14.w, r14.w, l(4)
+        and r17.w, r15.x, l(255)
+        ubfe r18.z, l(8), l(8), r15.x
+        uge r19.z, r5.w, r17.w
+        iadd r17.w, r17.w, r18.z
+        ult r17.w, r5.w, r17.w
+        and r17.w, r17.w, r19.z
+        if_nz r17.w
+          ubfe r19.x, l(6), l(16), r15.x
+          break
+        endif
+        iadd r20.x, r19.y, l(1)
+        mov r19.xy, r20.yxyy
+      endloop
+    endif
+    bfi r11.z, l(29), l(3), r10.y, l(0)
+    iadd r11.z, r19.x, r11.z
+    ishl r11.z, r11.z, l(3)
+    ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r11.z, r11.z, t7.xxxx
+    ushr r14.w, r11.z, l(16)
+    and r11.z, r11.z, l(0x0000ffff)
+    ieq r14.w, r14.w, cb0[2].x
+    ieq r11.z, r11.z, cb0[2].x
+    movc r11.z, cb0[2].z, r11.z, r14.w
+    if_nz r11.z
+      and r10.x, r10.x, l(1)
+      ushr r19.xw, r12.yyyz, l(8, 0, 0, 24)
+      and r11.z, r13.w, l(15)
+      iadd r18.zw, r11.zzzz, l(0, 0, 10, 5)
+      iadd r12.y, r9.y, r19.x
+      imul null, r13.w, r5.w, r18.z
+      ishr r14.w, r13.w, l(5)
+      ishl r14.w, r14.w, l(2)
+      iadd r12.y, r12.y, r14.w
+      ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r20.xy, r12.y, t0.xyxx
+      and r12.y, r13.w, l(31)
+      ushr r13.w, r20.x, r13.w
+      ult r14.w, l(0), r12.y
+      iadd r12.y, -r12.y, l(32)
+      ishl r12.y, r20.y, r12.y
+      and r12.y, r12.y, r14.w
+      or r12.y, r12.y, r13.w
+      ubfe r13.w, r11.z, l(0), r12.y
+      ushr r11.z, r12.y, r11.z
+      and r20.z, r11.z, l(31)
+      ushr r11.z, r12.y, r18.w
+      and r20.y, r11.z, l(31)
+      mov r20.x, l(0)
+      iadd r20.xyz, r13.wwww, r20.xyzx
+      movc r20.yz, r10.xxxx, r20.zzyz, r20.yyzy
+      ineg r10.x, r8.w
+      ult r23.xy, r8.wwww, l(1, 2, 0, 0)
+      and r23.z, r10.x, r23.y
+      iadd r10.x, r8.w, l(-3)
+      movc r23.w, r23.y, l(0), r10.x
+      and r23.xyz, r20.xyzx, r23.xzwx
+      mov r23.w, l(0)
+      or r18.zw, r23.yyyw, r23.xxxz
+      or r10.x, r18.w, r18.z
+      iadd r11.z, r16.w, r16.z
+      iadd r11.z, r15.z, r11.z
+      imul null, r11.z, r10.x, r11.z
+      iadd r12.y, r9.y, r11.w
+      ushr r13.w, r11.z, l(5)
+      ishl r13.w, r13.w, l(2)
+      iadd r12.y, r12.y, r13.w
+      ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r23.xyz, r12.y, t0.xyzx
+      and r12.y, r11.z, l(31)
+      ushr r18.zw, r23.xxxy, r11.zzzz
+      ult r11.z, l(0), r12.y
+      iadd r12.y, -r12.y, l(32)
+      ishl r22.zw, r23.yyyz, r12.yyyy
+      and r22.zw, r11.zzzz, r22.zzzw
+      or r18.zw, r18.zzzw, r22.zzzw
+      ubfe r23.x, r17.x, l(0), r18.z
+      ushr r22.zw, r18.zzzw, r17.xxxx
+      ult r24.xy, l(0, 0, 0, 0), r16.zwzz
+      iadd r24.zw, -r16.zzzw, l(0, 0, 32, 32)
+      ishl r11.z, r18.w, r24.z
+      and r11.z, r11.z, r24.x
+      or r11.z, r11.z, r22.z
+      ubfe r23.y, r17.y, l(0), r11.z
+      ushr r11.z, r11.z, r17.y
+      ishl r12.y, r22.w, r24.w
+      and r12.y, r12.y, r24.y
+      or r11.z, r11.z, r12.y
+      ubfe r23.z, r17.z, l(0), r11.z
+      ishl r11.z, r12.x, l(23)
+      iadd r11.z, -r11.z, l(0x3f800000)
+      iadd r23.xyz, r13.xyzx, r23.xyzx
+      itof r23.xyz, r23.xyzx
+      mul r23.xyz, r11.zzzz, r23.xyzx
+      iadd r18.zw, r9.yyyy, r18.xxxy
+      mov x0[3].xy, l(0,0,0,0)
+      mov x0[4].xy, l(0,0,0,0)
+      mov x0[5].xy, l(0,0,0,0)
+      mov x0[6].xy, l(0,0,0,0)
+      and r22.zw, r12.zzzw, l(0, 0, 255, 15)
+      ubfe r24.xyz, l(8, 8, 4, 0), l(8, 16, 12, 0), r12.zzwz
+      mov r19.x, r22.z
+      mov r19.yz, r24.xxyx
+      ubfe r12.yz, l(0, 4, 4, 0), l(0, 4, 8, 0), r15.yyyy
+      imul null, r11.z, r16.y, r10.x
+      ishr r13.w, r11.z, l(5)
+      ishl r13.w, r13.w, l(2)
+      iadd r13.w, r13.w, r18.w
+      ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r25.xyzw, r13.w, t0.xyzw
+      and r13.w, r11.z, l(31)
+      ushr r26.xyzw, r25.xyzw, r11.zzzz
+      ult r14.w, l(0), r13.w
+      iadd r13.w, -r13.w, l(32)
+      ishl r24.xyw, r25.yzyw, r13.wwww
+      and r24.xyw, r14.wwww, r24.xyxw
+      or r24.xyw, r24.xyxw, r26.xyxz
+      mov x1[1].x, r11.z
+      mov x1[2].xyz, r24.xywx
+      mov x1[3].x, l(18)
+      mov x1[4].x, l(79)
+      mov x1[5].x, l(14)
+      mov x1[6].x, l(163)
+      and r11.z, r24.x, l(511)
+      ubfe r13.w, l(9), l(9), r24.x
+      utof r25.x, r11.z
+      utof r25.y, r13.w
+      mad r25.xy, r25.xyxx, l(0.00391389430, 0.00391389430, 0.000000, 0.000000), l(-1.000000, -1.000000, 0.000000, 0.000000)
+      add r11.z, -|r25.x|, l(1.000000)
+      add r27.z, -|r25.y|, r11.z
+      max r11.z, -r27.z, l(0.000000)
+      ge r25.zw, r25.xxxy, l(0.000000, 0.000000, 0.000000, 0.000000)
+      movc r25.zw, r25.zzzw, -r11.zzzz, r11.zzzz
+      add r27.xy, r25.zwzz, r25.xyxx
+      dp3 r11.z, r27.xyzx, r27.xyzx
+      rsq r11.z, r11.z
+      mul r25.xyz, r11.zzzz, r27.xyzx
+      if_nz r15.w
+        imad r11.z, r10.x, r16.y, l(18)
+        ushr r27.xyz, r24.xywx, l(18, 18, 18, 0)
+        bfi r28.xy, l(18, 18, 0, 0), l(14, 14, 0, 0), r24.ywyy, r27.xyxx
+        bfi r28.z, l(18), l(14), r26.w, r27.z
+        mov x1[1].x, r11.z
+        mov x1[2].xyz, r28.xyzx
+        mov x1[3].x, l(19)
+        mov x1[4].x, l(60)
+        mov x1[5].x, l(13)
+        mov x1[6].x, l(144)
+        and r24.xy, r28.xxxx, l(0x0007ffff, 511, 0, 0)
+        ubfe r11.z, l(9), l(9), r24.x
+        utof r24.x, r24.y
+        utof r24.y, r11.z
+        mad r24.xy, r24.xyxx, l(0.00391389430, 0.00391389430, 0.000000, 0.000000), l(-1.000000, -1.000000, 0.000000, 0.000000)
+        add r11.z, -|r24.x|, l(1.000000)
+        add r27.z, -|r24.y|, r11.z
+        max r11.z, -r27.z, l(0.000000)
+        ge r28.yz, r24.xxyx, l(0.000000, 0.000000, 0.000000, 0.000000)
+        movc r28.yz, r28.yyzy, -r11.zzzz, r11.zzzz
+        add r27.xy, r24.xyxx, r28.yzyy
+        dp3 r11.z, r27.xyzx, r27.xyzx
+        rsq r11.z, r11.z
+        mul r24.xyw, r11.zzzz, r27.xyxz
+        ubfe r11.z, l(1), l(18), r28.x
+        movc r11.z, r11.z, l(1.000000), l(-1.000000)
+      else
+        mov r24.xyw, l(0,0,0,0)
+        mov r11.z, l(1.000000)
+      endif
+      mov r13.w, x1[1].x
+      mov r26.xyz, x1[2].xyzx
+      mov r14.w, x1[3].x
+      mov r27.x, x1[4].x
+      mov r15.x, x1[6].x
+      ilt r17.w, r27.x, l(8)
+      if_nz r17.w
+        iadd r13.w, r13.w, r14.w
+        ishr r17.w, r13.w, l(5)
+        ishl r17.w, r17.w, l(2)
+        iadd r17.w, r17.w, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r28.xyzw, r17.w, t0.xyzw
+        and r17.w, r13.w, l(31)
+        ushr r29.xyzw, r28.xyzw, r13.wwww
+        ult r20.w, l(0), r17.w
+        iadd r17.w, -r17.w, l(32)
+        ishl r28.xyz, r28.yzwy, r17.wwww
+        and r28.xyz, r20.wwww, r28.xyzx
+        ilt r30.xyz, l(32, 64, 96, 0), r15.xxxx
+        or r28.xyz, r28.xyzx, r29.xyzx
+        movc r28.yz, r30.xxyx, r28.yyzy, r26.yyzy
+        movc r28.w, r30.z, r29.w, r26.w
+        imin r27.xy, r15.xxxx, l(97, 32, 0, 0)
+        mov r26.x, r28.x
+        mov r14.w, l(0)
+      else
+        mov r27.y, x1[5].x
+        ilt r17.w, r27.y, l(8)
+        if_nz r17.w
+          iadd r13.w, r13.w, r14.w
+          and r17.w, r14.w, l(31)
+          ushr r29.xyz, r26.xyzx, r14.wwww
+          ult r20.w, l(0), r17.w
+          iadd r17.w, -r17.w, l(32)
+          ishl r27.zw, r26.yyyz, r17.wwww
+          and r27.zw, r20.wwww, r27.zzzw
+          ilt r30.xyz, l(32, 64, 96, 0), r27.xxxx
+          or r27.zw, r27.zzzw, r29.xxxy
+          movc r28.y, r30.x, r27.w, r26.y
+          ishl r17.w, r26.w, r17.w
+          and r17.w, r17.w, r20.w
+          or r17.w, r17.w, r29.z
+          movc r28.z, r30.y, r17.w, r26.z
+          ushr r17.w, r26.w, r14.w
+          movc r28.w, r30.z, r17.w, r26.w
+          imin r27.y, r15.x, l(32)
+          mov r26.x, r27.z
+          mov r14.w, l(0)
+        else
+          mov r28.yzw, r26.yyzw
+        endif
+      endif
+      ubfe r29.x, r22.w, r14.w, r26.x
+      iadd r14.w, r22.w, r14.w
+      iadd r30.x, r27.x, l(-8)
+      iadd r31.xyzw, r15.xxxx, l(-8, -16, -24, -32)
+      ilt r17.w, r30.x, l(8)
+      if_nz r17.w
+        iadd r13.w, r13.w, r14.w
+        ishr r17.w, r13.w, l(5)
+        ishl r17.w, r17.w, l(2)
+        iadd r17.w, r17.w, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r32.xyzw, r17.w, t0.xyzw
+        and r17.w, r13.w, l(31)
+        ushr r33.xyzw, r32.xyzw, r13.wwww
+        ult r20.w, l(0), r17.w
+        iadd r17.w, -r17.w, l(32)
+        ishl r27.xzw, r32.yyzw, r17.wwww
+        and r27.xzw, r20.wwww, r27.xxzw
+        ilt r32.xyz, l(32, 64, 96, 0), r31.xxxx
+        or r26.xyz, r27.xzwx, r33.xyzx
+        movc r28.yz, r32.xxyx, r26.yyzy, r28.yyzy
+        movc r28.w, r32.z, r33.w, r28.w
+        imin r30.xy, r31.xxxx, l(97, 32, 0, 0)
+        mov r14.w, l(0)
+      else
+        iadd r30.y, r27.y, l(-8)
+        ilt r17.w, r30.y, l(8)
+        if_nz r17.w
+          iadd r13.w, r13.w, r14.w
+          and r17.w, r14.w, l(31)
+          ushr r20.w, r26.x, r14.w
+          ult r21.y, l(0), r17.w
+          iadd r17.w, -r17.w, l(32)
+          ishl r22.z, r28.y, r17.w
+          and r22.z, r21.y, r22.z
+          or r26.x, r20.w, r22.z
+          ilt r27.xyz, l(32, 64, 96, 0), r30.xxxx
+          ushr r20.w, r28.y, r14.w
+          ishl r22.zw, r28.zzzw, r17.wwww
+          and r22.zw, r21.yyyy, r22.zzzw
+          or r17.w, r20.w, r22.z
+          movc r28.y, r27.x, r17.w, r28.y
+          ushr r27.xw, r28.zzzw, r14.wwww
+          or r17.w, r22.w, r27.x
+          movc r28.z, r27.y, r17.w, r28.z
+          movc r28.w, r27.z, r27.w, r28.w
+          imin r30.y, r31.x, l(32)
+          mov r14.w, l(0)
+        endif
+      endif
+      ubfe r29.y, r12.y, r14.w, r26.x
+      iadd r12.y, r12.y, r14.w
+      iadd r27.x, r30.x, l(-8)
+      ilt r14.w, r27.x, l(8)
+      if_nz r14.w
+        iadd r13.w, r12.y, r13.w
+        ishr r14.w, r13.w, l(5)
+        ishl r14.w, r14.w, l(2)
+        iadd r14.w, r14.w, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r32.xyzw, r14.w, t0.xyzw
+        and r14.w, r13.w, l(31)
+        ushr r33.xyzw, r32.xyzw, r13.wwww
+        ult r17.w, l(0), r14.w
+        iadd r14.w, -r14.w, l(32)
+        ishl r30.xzw, r32.yyzw, r14.wwww
+        and r30.xzw, r17.wwww, r30.xxzw
+        ilt r32.xyz, l(32, 64, 96, 0), r31.yyyy
+        or r26.xyz, r30.xzwx, r33.xyzx
+        movc r28.yz, r32.xxyx, r26.yyzy, r28.yyzy
+        movc r28.w, r32.z, r33.w, r28.w
+        imin r27.xy, r31.yyyy, l(97, 32, 0, 0)
+        mov r12.y, l(0)
+      else
+        iadd r27.y, r30.y, l(-8)
+        ilt r14.w, r27.y, l(8)
+        if_nz r14.w
+          iadd r13.w, r12.y, r13.w
+          and r14.w, r12.y, l(31)
+          ushr r17.w, r26.x, r12.y
+          ult r20.w, l(0), r14.w
+          iadd r14.w, -r14.w, l(32)
+          ishl r21.y, r28.y, r14.w
+          and r21.y, r20.w, r21.y
+          or r26.x, r17.w, r21.y
+          ilt r30.xyz, l(32, 64, 96, 0), r27.xxxx
+          ushr r17.w, r28.y, r12.y
+          ishl r22.zw, r28.zzzw, r14.wwww
+          and r22.zw, r20.wwww, r22.zzzw
+          or r14.w, r17.w, r22.z
+          movc r28.y, r30.x, r14.w, r28.y
+          ushr r27.zw, r28.zzzw, r12.yyyy
+          or r14.w, r22.w, r27.z
+          movc r28.z, r30.y, r14.w, r28.z
+          movc r28.w, r30.z, r27.w, r28.w
+          imin r27.y, r31.y, l(32)
+          mov r12.y, l(0)
+        endif
+      endif
+      ubfe r29.z, r12.z, r12.y, r26.x
+      iadd r12.y, r12.z, r12.y
+      iadd r30.x, r27.x, l(-8)
+      ilt r12.z, r30.x, l(8)
+      if_nz r12.z
+        iadd r13.w, r12.y, r13.w
+        ishr r12.z, r13.w, l(5)
+        ishl r12.z, r12.z, l(2)
+        iadd r12.z, r12.z, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r32.xyzw, r12.z, t0.xyzw
+        and r12.z, r13.w, l(31)
+        ushr r33.xyzw, r32.xyzw, r13.wwww
+        ult r14.w, l(0), r12.z
+        iadd r12.z, -r12.z, l(32)
+        ishl r27.xzw, r32.yyzw, r12.zzzz
+        and r27.xzw, r14.wwww, r27.xxzw
+        ilt r32.xyz, l(32, 64, 96, 0), r31.zzzz
+        or r26.xyz, r27.xzwx, r33.xyzx
+        movc r28.yz, r32.xxyx, r26.yyzy, r28.yyzy
+        movc r28.w, r32.z, r33.w, r28.w
+        imin r30.xy, r31.zzzz, l(97, 32, 0, 0)
+        mov r12.y, l(0)
+      else
+        iadd r30.y, r27.y, l(-8)
+        ilt r12.z, r30.y, l(8)
+        if_nz r12.z
+          iadd r13.w, r12.y, r13.w
+          and r12.z, r12.y, l(31)
+          ushr r14.w, r26.x, r12.y
+          ult r17.w, l(0), r12.z
+          iadd r12.z, -r12.z, l(32)
+          ishl r20.w, r28.y, r12.z
+          and r20.w, r17.w, r20.w
+          or r26.x, r14.w, r20.w
+          ilt r27.xyz, l(32, 64, 96, 0), r30.xxxx
+          ushr r14.w, r28.y, r12.y
+          ishl r22.zw, r28.zzzw, r12.zzzz
+          and r22.zw, r17.wwww, r22.zzzw
+          or r12.z, r14.w, r22.z
+          movc r28.y, r27.x, r12.z, r28.y
+          ushr r27.xw, r28.zzzw, r12.yyyy
+          or r12.z, r22.w, r27.x
+          movc r28.z, r27.y, r12.z, r28.z
+          movc r28.w, r27.z, r27.w, r28.w
+          imin r30.y, r31.z, l(32)
+          mov r12.y, l(0)
+        endif
+      endif
+      ubfe r29.w, r24.z, r12.y, r26.x
+      iadd r12.y, r24.z, r12.y
+      iadd r27.x, r30.x, l(-8)
+      iadd r19.xyzw, r19.xyzw, r29.xyzw
+      utof r19.xyzw, r19.xyzw
+      mul r19.xyzw, r19.xyzw, l(0.00392156886, 0.00392156886, 0.00392156886, 0.00392156886)
+      and r12.z, r14.z, l(15)
+      ubfe r29.xyzw, l(4, 4, 4, 4), l(4, 8, 12, 16), r14.zzzz
+      ilt r14.w, r27.x, l(15)
+      if_nz r14.w
+        iadd r13.w, r12.y, r13.w
+        ishr r14.w, r13.w, l(5)
+        ishl r14.w, r14.w, l(2)
+        iadd r14.w, r14.w, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r32.xyzw, r14.w, t0.xyzw
+        and r14.w, r13.w, l(31)
+        ushr r33.xyzw, r32.xyzw, r13.wwww
+        ult r17.w, l(0), r14.w
+        iadd r14.w, -r14.w, l(32)
+        ishl r30.xzw, r32.yyzw, r14.wwww
+        and r30.xzw, r17.wwww, r30.xxzw
+        ilt r31.xyz, l(32, 64, 96, 0), r31.wwww
+        or r26.xyz, r30.xzwx, r33.xyzx
+        movc r28.yz, r31.xxyx, r26.yyzy, r28.yyzy
+        movc r28.w, r31.z, r33.w, r28.w
+        imin r27.xy, r31.wwww, l(97, 32, 0, 0)
+        mov r12.y, l(0)
+      else
+        iadd r27.y, r30.y, l(-8)
+        ilt r14.w, r27.y, l(15)
+        if_nz r14.w
+          iadd r13.w, r12.y, r13.w
+          and r14.w, r12.y, l(31)
+          ushr r17.w, r26.x, r12.y
+          ult r20.w, l(0), r14.w
+          iadd r14.w, -r14.w, l(32)
+          ishl r21.y, r28.y, r14.w
+          and r21.y, r20.w, r21.y
+          or r26.x, r17.w, r21.y
+          ilt r26.yzw, l(0, 32, 64, 96), r27.xxxx
+          ushr r17.w, r28.y, r12.y
+          ishl r22.zw, r28.zzzw, r14.wwww
+          and r22.zw, r20.wwww, r22.zzzw
+          or r14.w, r17.w, r22.z
+          movc r28.y, r26.y, r14.w, r28.y
+          ushr r27.zw, r28.zzzw, r12.yyyy
+          or r14.w, r22.w, r27.z
+          movc r28.z, r26.z, r14.w, r28.z
+          movc r28.w, r26.w, r27.w, r28.w
+          imin r27.y, r31.w, l(32)
+          mov r12.y, l(0)
+        endif
+      endif
+      iadd r14.w, r12.z, r12.y
+      iadd r30.x, r27.x, l(-15)
+      iadd r31.xyzw, r15.xxxx, l(-47, -62, -77, -92)
+      ilt r17.w, r30.x, l(15)
+      if_nz r17.w
+        iadd r13.w, r13.w, r14.w
+        ishr r17.w, r13.w, l(5)
+        ishl r17.w, r17.w, l(2)
+        iadd r17.w, r17.w, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r32.xyzw, r17.w, t0.xyzw
+        and r17.w, r13.w, l(31)
+        ushr r33.xyzw, r32.xyzw, r13.wwww
+        ult r20.w, l(0), r17.w
+        iadd r17.w, -r17.w, l(32)
+        ishl r26.yzw, r32.yyzw, r17.wwww
+        and r26.yzw, r20.wwww, r26.yyzw
+        ilt r27.xzw, l(32, 0, 64, 96), r31.xxxx
+        or r26.yzw, r26.yyzw, r33.xxyz
+        movc r28.yz, r27.xxzx, r26.zzwz, r28.yyzy
+        movc r28.w, r27.w, r33.w, r28.w
+        imin r30.xy, r31.xxxx, l(97, 32, 0, 0)
+        mov r14.w, l(0)
+      else
+        iadd r30.y, r27.y, l(-15)
+        ilt r17.w, r30.y, l(15)
+        if_nz r17.w
+          iadd r13.w, r13.w, r14.w
+          and r17.w, r14.w, l(31)
+          ushr r20.w, r26.x, r14.w
+          ult r21.y, l(0), r17.w
+          iadd r17.w, -r17.w, l(32)
+          ishl r22.z, r28.y, r17.w
+          and r22.z, r21.y, r22.z
+          or r26.y, r20.w, r22.z
+          ilt r27.xyz, l(32, 64, 96, 0), r30.xxxx
+          ushr r20.w, r28.y, r14.w
+          ishl r22.zw, r28.zzzw, r17.wwww
+          and r22.zw, r21.yyyy, r22.zzzw
+          or r17.w, r20.w, r22.z
+          movc r28.y, r27.x, r17.w, r28.y
+          ushr r27.xw, r28.zzzw, r14.wwww
+          or r17.w, r22.w, r27.x
+          movc r28.z, r27.y, r17.w, r28.z
+          movc r28.w, r27.z, r27.w, r28.w
+          imin r30.y, r31.x, l(32)
+          mov r14.w, l(0)
+        else
+          mov r26.y, r26.x
+        endif
+      endif
+      iadd r17.w, r29.x, r14.w
+      iadd r27.x, r30.x, l(-15)
+      ult r30.xzw, l(1, 0, 2, 3), r14.xxxx
+      if_nz r14.x
+        ubfe r32.x, r12.z, r12.y, r26.x
+        ubfe r32.y, r29.x, r14.w, r26.y
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r33.xyzw, r18.z, t0.xyzw
+        iadd r12.y, r18.z, l(16)
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r34.xyz, r12.y, t0.xyzx
+        ult r12.yz, r33.zzwz, r32.xxyx
+        and r12.yz, r34.xxyx, r12.yyzy
+        iadd r12.yz, r12.yyzy, r32.xxyx
+        ishl r14.w, r34.z, l(23)
+        iadd r14.w, -r14.w, l(0x3f800000)
+        iadd r12.yz, r33.xxyx, r12.yyzy
+        itof r12.yz, r12.yyzy
+        mul r12.yz, r14.wwww, r12.yyzy
+        mov x0[3].xy, r12.yzyy
+      endif
+      ilt r12.y, r27.x, l(15)
+      if_nz r12.y
+        iadd r13.w, r13.w, r17.w
+        ishr r12.y, r13.w, l(5)
+        ishl r12.y, r12.y, l(2)
+        iadd r12.y, r12.y, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r32.xyzw, r12.y, t0.xyzw
+        and r12.y, r13.w, l(31)
+        ushr r33.xyzw, r32.xyzw, r13.wwww
+        ult r12.z, l(0), r12.y
+        iadd r12.y, -r12.y, l(32)
+        ishl r32.xyz, r32.yzwy, r12.yyyy
+        and r32.xyz, r12.zzzz, r32.xyzx
+        ilt r34.xyz, l(32, 64, 96, 0), r31.yyyy
+        or r26.yzw, r32.xxyz, r33.xxyz
+        movc r28.yz, r34.xxyx, r26.zzwz, r28.yyzy
+        movc r28.w, r34.z, r33.w, r28.w
+        imin r27.xy, r31.yyyy, l(97, 32, 0, 0)
+        mov r17.w, l(0)
+      else
+        iadd r27.y, r30.y, l(-15)
+        ilt r12.y, r27.y, l(15)
+        if_nz r12.y
+          iadd r13.w, r13.w, r17.w
+          and r12.y, r17.w, l(31)
+          ushr r12.z, r26.y, r17.w
+          ult r14.w, l(0), r12.y
+          iadd r12.y, -r12.y, l(32)
+          ishl r20.w, r28.y, r12.y
+          and r20.w, r14.w, r20.w
+          or r26.y, r12.z, r20.w
+          ilt r26.xzw, l(32, 0, 64, 96), r27.xxxx
+          ushr r12.z, r28.y, r17.w
+          ishl r22.zw, r28.zzzw, r12.yyyy
+          and r22.zw, r14.wwww, r22.zzzw
+          or r12.y, r12.z, r22.z
+          movc r28.y, r26.x, r12.y, r28.y
+          ushr r12.yz, r28.zzwz, r17.wwww
+          or r12.y, r22.w, r12.y
+          movc r28.zw, r26.zzzw, r12.yyyz, r28.zzzw
+          imin r27.y, r31.y, l(32)
+          mov r17.w, l(0)
+        endif
+      endif
+      iadd r12.y, r29.y, r17.w
+      iadd r31.x, r27.x, l(-15)
+      ilt r12.z, r31.x, l(15)
+      if_nz r12.z
+        iadd r13.w, r12.y, r13.w
+        ishr r12.z, r13.w, l(5)
+        ishl r12.z, r12.z, l(2)
+        iadd r12.z, r12.z, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r32.xyzw, r12.z, t0.xyzw
+        and r12.z, r13.w, l(31)
+        ushr r33.xyzw, r32.xyzw, r13.wwww
+        ult r14.w, l(0), r12.z
+        iadd r12.z, -r12.z, l(32)
+        ishl r26.xzw, r32.yyzw, r12.zzzz
+        and r26.xzw, r14.wwww, r26.xxzw
+        ilt r27.xzw, l(32, 0, 64, 96), r31.zzzz
+        or r26.xzw, r26.xxzw, r33.xxyz
+        movc r28.yz, r27.xxzx, r26.zzwz, r28.yyzy
+        movc r28.w, r27.w, r33.w, r28.w
+        imin r31.xy, r31.zzzz, l(97, 32, 0, 0)
+        mov r12.y, l(0)
+      else
+        iadd r31.y, r27.y, l(-15)
+        ilt r12.z, r31.y, l(15)
+        if_nz r12.z
+          iadd r13.w, r12.y, r13.w
+          and r12.z, r12.y, l(31)
+          ushr r14.w, r26.y, r12.y
+          ult r20.w, l(0), r12.z
+          iadd r12.z, -r12.z, l(32)
+          ishl r21.y, r28.y, r12.z
+          and r21.y, r20.w, r21.y
+          or r26.x, r14.w, r21.y
+          ilt r27.xyz, l(32, 64, 96, 0), r31.xxxx
+          ushr r14.w, r28.y, r12.y
+          ishl r22.zw, r28.zzzw, r12.zzzz
+          and r22.zw, r20.wwww, r22.zzzw
+          or r12.z, r14.w, r22.z
+          movc r28.y, r27.x, r12.z, r28.y
+          ushr r27.xw, r28.zzzw, r12.yyyy
+          or r12.z, r22.w, r27.x
+          movc r28.z, r27.y, r12.z, r28.z
+          movc r28.w, r27.z, r27.w, r28.w
+          imin r31.y, r31.z, l(32)
+          mov r12.y, l(0)
+        else
+          mov r26.x, r26.y
+        endif
+      endif
+      iadd r12.z, r29.z, r12.y
+      iadd r27.x, r31.x, l(-15)
+      if_nz r30.x
+        ubfe r29.x, r29.y, r17.w, r26.y
+        ubfe r29.y, r29.z, r12.y, r26.x
+        iadd r22.zw, r18.zzzz, l(0, 0, 32, 48)
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r32.xyzw, r22.z, t0.xyzw
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r33.xyz, r22.w, t0.xyzx
+        ult r22.zw, r32.zzzw, r29.xxxy
+        and r22.zw, r33.xxxy, r22.zzzw
+        iadd r22.zw, r22.zzzw, r29.xxxy
+        ishl r12.y, r33.z, l(23)
+        iadd r12.y, -r12.y, l(0x3f800000)
+        iadd r22.zw, r32.xxxy, r22.zzzw
+        itof r22.zw, r22.zzzw
+        mul r22.zw, r12.yyyy, r22.zzzw
+        mov x0[4].xy, r22.zwzz
+      endif
+      ubfe r22.zw, l(0, 0, 4, 4), l(0, 0, 20, 24), r14.zzzz
+      ilt r12.y, r27.x, l(15)
+      if_nz r12.y
+        iadd r13.w, r12.z, r13.w
+        ishr r12.y, r13.w, l(5)
+        ishl r12.y, r12.y, l(2)
+        iadd r12.y, r12.y, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r32.xyzw, r12.y, t0.xyzw
+        and r12.y, r13.w, l(31)
+        ushr r33.xyzw, r32.xyzw, r13.wwww
+        ult r14.w, l(0), r12.y
+        iadd r12.y, -r12.y, l(32)
+        ishl r29.xyz, r32.yzwy, r12.yyyy
+        and r29.xyz, r14.wwww, r29.xyzx
+        ilt r32.xyz, l(32, 64, 96, 0), r31.wwww
+        or r26.xzw, r29.xxyz, r33.xxyz
+        movc r28.yz, r32.xxyx, r26.zzwz, r28.yyzy
+        movc r28.w, r32.z, r33.w, r28.w
+        imin r27.xy, r31.wwww, l(97, 32, 0, 0)
+        mov r12.z, l(0)
+      else
+        iadd r27.y, r31.y, l(-15)
+        ilt r12.y, r27.y, l(15)
+        if_nz r12.y
+          iadd r13.w, r12.z, r13.w
+          and r12.y, r12.z, l(31)
+          ushr r14.w, r26.x, r12.z
+          ult r17.w, l(0), r12.y
+          iadd r12.y, -r12.y, l(32)
+          ishl r20.w, r28.y, r12.y
+          and r20.w, r17.w, r20.w
+          or r26.x, r14.w, r20.w
+          ilt r26.yzw, l(0, 32, 64, 96), r27.xxxx
+          ushr r14.w, r28.y, r12.z
+          ishl r27.zw, r28.zzzw, r12.yyyy
+          and r27.zw, r17.wwww, r27.zzzw
+          or r12.y, r14.w, r27.z
+          movc r28.y, r26.y, r12.y, r28.y
+          ushr r29.xy, r28.zwzz, r12.zzzz
+          or r12.y, r27.w, r29.x
+          movc r28.z, r26.z, r12.y, r28.z
+          movc r28.w, r26.w, r29.y, r28.w
+          imin r27.y, r31.w, l(32)
+          mov r12.z, l(0)
+        endif
+      endif
+      iadd r12.y, r29.w, r12.z
+      iadd r29.x, r27.x, l(-15)
+      iadd r26.yz, r15.xxxx, l(0, -107, -122, 0)
+      ilt r14.w, r29.x, l(15)
+      if_nz r14.w
+        iadd r13.w, r12.y, r13.w
+        ishr r14.w, r13.w, l(5)
+        ishl r14.w, r14.w, l(2)
+        iadd r14.w, r14.w, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r31.xyzw, r14.w, t0.xyzw
+        and r14.w, r13.w, l(31)
+        ushr r27.xzw, r31.xxyz, r13.wwww
+        ult r15.x, l(0), r14.w
+        iadd r14.w, -r14.w, l(32)
+        ishl r31.xyz, r31.yzwy, r14.wwww
+        and r31.xyz, r15.xxxx, r31.xyzx
+        ilt r30.xy, l(32, 64, 0, 0), r26.yyyy
+        or r27.xzw, r27.xxzw, r31.xxyz
+        movc r28.yz, r30.xxyx, r27.zzwz, r28.yyzy
+        imin r29.xy, r26.yyyy, l(97, 32, 0, 0)
+        mov r12.y, l(0)
+      else
+        iadd r29.y, r27.y, l(-15)
+        ilt r14.w, r29.y, l(15)
+        if_nz r14.w
+          iadd r13.w, r12.y, r13.w
+          and r14.w, r12.y, l(31)
+          ushr r15.x, r26.x, r12.y
+          ult r17.w, l(0), r14.w
+          iadd r14.w, -r14.w, l(32)
+          ishl r20.w, r28.y, r14.w
+          and r20.w, r17.w, r20.w
+          or r27.x, r15.x, r20.w
+          ilt r27.yw, l(0, 32, 0, 64), r29.xxxx
+          ushr r15.x, r28.y, r12.y
+          ishl r20.w, r28.z, r14.w
+          and r20.w, r17.w, r20.w
+          or r15.x, r15.x, r20.w
+          movc r28.y, r27.y, r15.x, r28.y
+          ushr r15.x, r28.z, r12.y
+          ishl r14.w, r28.w, r14.w
+          and r14.w, r14.w, r17.w
+          or r14.w, r14.w, r15.x
+          movc r28.z, r27.w, r14.w, r28.z
+          imin r29.y, r26.y, l(32)
+          mov r12.y, l(0)
+        else
+          mov r27.x, r26.x
+        endif
+      endif
+      iadd r14.w, r22.z, r12.y
+      iadd r30.x, r29.x, l(-15)
+      if_nz r30.z
+        ubfe r26.x, r29.w, r12.z, r26.x
+        ubfe r26.y, r22.z, r12.y, r27.x
+        iadd r12.yz, r18.zzzz, l(0, 64, 80, 0)
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r31.xyzw, r12.y, t0.xyzw
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r29.xzw, r12.z, t0.xxyz
+        ult r12.yz, r31.zzwz, r26.xxyx
+        and r12.yz, r29.xxzx, r12.yyzy
+        iadd r12.yz, r12.yyzy, r26.xxyx
+        ishl r15.x, r29.w, l(23)
+        iadd r15.x, -r15.x, l(0x3f800000)
+        iadd r12.yz, r31.xxyx, r12.yyzy
+        itof r12.yz, r12.yyzy
+        mul r12.yz, r15.xxxx, r12.yyzy
+        mov x0[5].xy, r12.yzyy
+      endif
+      ilt r12.y, r30.x, l(15)
+      if_nz r12.y
+        iadd r13.w, r13.w, r14.w
+        ishr r12.y, r13.w, l(5)
+        ishl r12.y, r12.y, l(2)
+        iadd r12.y, r12.y, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r26.xyw, r12.y, t0.xyxz
+        and r12.y, r13.w, l(31)
+        ushr r27.yw, r26.xxxy, r13.wwww
+        ult r12.z, l(0), r12.y
+        iadd r12.y, -r12.y, l(32)
+        ishl r26.xy, r26.ywyy, r12.yyyy
+        and r12.yz, r12.zzzz, r26.xxyx
+        ilt r15.x, l(32), r26.z
+        or r27.xz, r12.yyzy, r27.yywy
+        movc r28.y, r15.x, r27.z, r28.y
+        imin r30.xy, r26.zzzz, l(97, 32, 0, 0)
+        mov r14.w, l(0)
+      else
+        iadd r30.y, r29.y, l(-15)
+        ilt r12.y, r30.y, l(15)
+        if_nz r12.y
+          iadd r13.w, r13.w, r14.w
+          and r12.y, r14.w, l(31)
+          ushr r12.z, r27.x, r14.w
+          ult r15.x, l(0), r12.y
+          iadd r12.y, -r12.y, l(32)
+          ishl r17.w, r28.y, r12.y
+          and r17.w, r15.x, r17.w
+          or r27.x, r12.z, r17.w
+          ilt r12.z, l(32), r30.x
+          ushr r17.w, r28.y, r14.w
+          ishl r12.y, r28.z, r12.y
+          and r12.y, r12.y, r15.x
+          or r12.y, r12.y, r17.w
+          movc r28.y, r12.z, r12.y, r28.y
+          imin r30.y, r26.z, l(32)
+          mov r14.w, l(0)
+        endif
+      endif
+      iadd r27.z, r22.w, r14.w
+      iadd r12.y, r30.x, l(-15)
+      ilt r12.y, r12.y, l(15)
+      if_nz r12.y
+        iadd r12.y, r13.w, r27.z
+        ishr r12.z, r12.y, l(5)
+        ishl r12.z, r12.z, l(2)
+        iadd r12.z, r12.z, r18.w
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r26.xy, r12.z, t0.xyxx
+        and r12.z, r12.y, l(31)
+        ushr r12.y, r26.x, r12.y
+        ult r13.w, l(0), r12.z
+        iadd r12.z, -r12.z, l(32)
+        ishl r12.z, r26.y, r12.z
+        and r12.z, r12.z, r13.w
+        or r26.x, r12.z, r12.y
+        mov r26.y, l(0)
+      else
+        iadd r12.y, r30.y, l(-15)
+        ilt r12.y, r12.y, l(15)
+        if_nz r12.y
+          and r12.y, r27.z, l(31)
+          ushr r12.z, r27.x, r27.z
+          ult r13.w, l(0), r12.y
+          iadd r12.y, -r12.y, l(32)
+          ishl r12.y, r28.y, r12.y
+          and r12.y, r12.y, r13.w
+          or r26.x, r12.y, r12.z
+          mov r26.y, l(0)
+        else
+          mov r26.xy, r27.xzxx
+        endif
+      endif
+      if_nz r30.w
+        ushr r12.y, r14.z, l(28)
+        ubfe r27.x, r22.w, r14.w, r27.x
+        ubfe r27.y, r12.y, r26.y, r26.x
+        iadd r12.yz, r18.zzzz, l(0, 96, 112, 0)
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r26.xyzw, r12.y, t0.xyzw
+        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r28.xyz, r12.z, t0.xyzx
+        ult r12.yz, r26.zzwz, r27.xxyx
+        and r12.yz, r28.xxyx, r12.yyzy
+        iadd r12.yz, r12.yyzy, r27.xxyx
+        ishl r13.w, r28.z, l(23)
+        iadd r13.w, -r13.w, l(0x3f800000)
+        iadd r12.yz, r26.xxyx, r12.yyzy
+        itof r12.yz, r12.yyzy
+        mul r12.yz, r13.wwww, r12.yyzy
+        mov x0[6].xy, r12.yzyy
+      endif
+      mov r12.yz, x0[3].xxyx
+      mov r18.zw, x0[4].xxxy
+      mov r22.zw, x0[5].xxxy
+      mov r26.xy, x0[6].xyxx
+      mov o5.xyzw, r19.xyzw
+      mov r27.xyz, r25.xyzx
+      mov r28.xyz, r24.xywx
+      mov r29.xy, r12.yzyy
+      mov r30.xy, r18.zwzz
+      mov r31.xy, r22.zwzz
+      mov o1.w, r11.z
+    else
+      mov o5.xyzw, v6.xyzw
+      mov r19.xyzw, l(0,0,0,0)
+      mov r23.xyz, v0.xyzx
+      mov r27.xyz, v1.xyzx
+      mov r28.xyz, v2.xyzx
+      mov r25.xyz, l(0,0,0,0)
+      mov r24.xyw, l(0,0,0,0)
+      mov r20.xyz, l(0,0,0,0)
+      mov r29.xy, v3.xyxx
+      mov r30.xy, v4.xyxx
+      mov r31.xy, v5.xyxx
+      mov r18.zw, l(0,0,0,0)
+      mov r22.zw, l(0,0,0,0)
+      mov r26.xy, l(0,0,0,0)
+      mov o1.w, v2.w
+      mov r11.z, l(0)
+      mov r12.yz, l(0,0,0,0)
+      mov r10.x, l(0)
+    endif
+  else
+    mov o5.xyzw, v6.xyzw
+    mov r19.xyzw, l(0,0,0,0)
+    mov r23.xyz, v0.xyzx
+    mov r27.xyz, v1.xyzx
+    mov r28.xyz, v2.xyzx
+    mov r25.xyz, l(0,0,0,0)
+    mov r24.xyw, l(0,0,0,0)
+    mov r20.xyz, l(0,0,0,0)
+    mov r29.xy, v3.xyxx
+    mov r30.xy, v4.xyxx
+    mov r31.xy, v5.xyxx
+    mov r18.zw, l(0,0,0,0)
+    mov r22.zw, l(0,0,0,0)
+    mov r26.xy, l(0,0,0,0)
+    mov o1.w, v2.w
+    mov r11.z, l(0)
+    mov r12.yz, l(0,0,0,0)
+    mov r10.x, l(0)
+  endif
+  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r13.w, r11.y, t3.xxxx
+  and r32.x, r21.w, l(0x00003fff)
+  ubfe r32.y, l(14), l(14), r21.w
+  and r32.z, r11.x, l(0x00003fff)
+  ubfe r32.w, l(14), l(14), r11.x
+  and r33.xz, r21.xxzx, l(0x00003fff, 0, 0x00003fff, 0)
+  ubfe r33.yw, l(0, 14, 0, 14), l(0, 14, 0, 14), r21.xxxz
+  and r21.yz, r22.xxyx, l(0, 15, 15, 0)
+  ubfe r34.xyzw, l(4, 4, 4, 4), l(4, 8, 4, 8), r22.yyxx
+  ushr r26.zw, r22.yyyx, l(0, 0, 12, 12)
+  iadd r35.xy, r21.zyzz, r34.xzxx
+  iadd r35.yz, r34.yywy, r35.xxyx
+  iadd r35.yz, r26.zzwz, r35.yyzy
+  iadd r10.w, r9.y, r10.w
+  iadd r11.x, r35.z, r35.y
+  imul null, r14.w, r10.x, r11.x
+  if_nz r22.y
+    ishr r15.x, r14.w, l(5)
+    ishl r15.x, r15.x, l(2)
+    iadd r15.x, r10.w, r15.x
+    ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r36.xyzw, r15.x, t0.xyzw
+    and r15.x, r14.w, l(31)
+    ushr r37.xyzw, r36.xyzw, r14.wwww
+    ult r17.w, l(0), r15.x
+    iadd r15.x, -r15.x, l(32)
+    ishl r35.yzw, r36.yyzw, r15.xxxx
+    and r35.yzw, r17.wwww, r35.yyzw
+    or r35.yzw, r35.yyzw, r37.xxyz
+    ubfe r36.x, r21.z, l(0), r35.y
+    ubfe r36.y, r34.x, r21.z, r35.y
+    imad r15.x, r10.x, r11.x, r35.x
+    ushr r37.xyz, r35.yzwy, r35.xxxx
+    ult r17.w, l(0), r35.x
+    iadd r20.w, -r35.x, l(32)
+    ishl r35.yz, r35.zzwz, r20.wwww
+    and r35.yz, r17.wwww, r35.yyzy
+    or r38.xy, r35.yzyy, r37.xyxx
+    ishl r20.w, r37.w, r20.w
+    and r17.w, r17.w, r20.w
+    or r17.w, r17.w, r37.z
+    ubfe r36.z, r34.y, l(0), r38.x
+    ubfe r36.w, r26.z, r34.y, r38.x
+    iadd r38.z, r26.z, r34.y
+    iadd r36.xyzw, r33.xyzw, r36.xyzw
+    mov r20.w, l(41)
+    mov r21.w, l(56)
+  else
+    mov r36.xyzw, r33.xyzw
+    mov r38.xyz, l(0,0,0,0)
+    mov r17.w, l(0)
+    mov r15.x, r14.w
+    mov r20.w, l(0)
+    mov r21.w, l(112)
+  endif
+  if_nz r22.x
+    ilt r24.z, r20.w, l(14)
+    if_nz r24.z
+      iadd r37.y, r38.z, r15.x
+      ishr r24.z, r37.y, l(5)
+      ishl r24.z, r24.z, l(2)
+      iadd r24.z, r10.w, r24.z
+      ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r39.xyzw, r24.z, t0.xyzw
+      and r24.z, r37.y, l(31)
+      ushr r35.yzw, r39.xxyz, r37.yyyy
+      ult r25.w, l(0), r24.z
+      iadd r24.z, -r24.z, l(32)
+      ishl r39.xyz, r39.yzwy, r24.zzzz
+      and r39.xyz, r25.wwww, r39.xyzx
+      ilt r24.z, l(64), r21.w
+      or r37.xzw, r35.yyzw, r39.xxyz
+      movc r17.w, r24.z, r37.w, r17.w
+      imin r20.w, r21.w, l(97)
+      mov r35.yz, r37.yyzy
+    else
+      iadd r35.y, r38.z, r15.x
+      ushr r38.xw, r38.xxxy, r38.zzzz
+      ult r15.x, l(0), r38.z
+      iadd r24.z, -r38.z, l(32)
+      ishl r25.w, r38.y, r24.z
+      and r25.w, r15.x, r25.w
+      or r37.x, r25.w, r38.x
+      ilt r25.w, l(32), r20.w
+      ishl r24.z, r17.w, r24.z
+      and r15.x, r15.x, r24.z
+      or r15.x, r15.x, r38.w
+      movc r35.z, r25.w, r15.x, r38.y
+    endif
+    ubfe r38.x, r21.y, l(0), r37.x
+    iadd r39.x, r20.w, l(-14)
+    ilt r15.x, r39.x, l(14)
+    if_nz r15.x
+      iadd r15.x, r21.w, l(-14)
+      iadd r37.y, r21.y, r35.y
+      ishr r20.w, r37.y, l(5)
+      ishl r20.w, r20.w, l(2)
+      iadd r20.w, r10.w, r20.w
+      ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r40.xyzw, r20.w, t0.xyzw
+      and r20.w, r37.y, l(31)
+      ushr r41.xyz, r40.xyzx, r37.yyyy
+      ult r24.z, l(0), r20.w
+      iadd r20.w, -r20.w, l(32)
+      ishl r40.xyz, r40.yzwy, r20.wwww
+      and r40.xyz, r24.zzzz, r40.xyzx
+      ilt r20.w, l(64), r15.x
+      or r37.xzw, r40.xxyz, r41.xxyz
+      movc r17.w, r20.w, r37.w, r17.w
+      imin r39.x, r15.x, l(97)
+      mov r35.yz, r37.yyzy
+      mov r39.y, l(32)
+      mov r15.x, l(0)
+    else
+      mov r39.y, l(18)
+      mov r15.x, r21.y
+    endif
+    ubfe r38.y, r34.z, r15.x, r37.x
+    iadd r37.y, r34.z, r15.x
+    iadd r40.y, r39.x, l(-14)
+    iadd r41.x, r21.w, l(-28)
+    ilt r15.x, r40.y, l(14)
+    if_nz r15.x
+      iadd r39.x, r35.y, r37.y
+      ishr r15.x, r39.x, l(5)
+      ishl r15.x, r15.x, l(2)
+      iadd r15.x, r10.w, r15.x
+      ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r42.xyz, r15.x, t0.xyzx
+      and r15.x, r39.x, l(31)
+      ushr r41.zw, r42.xxxy, r39.xxxx
+      ult r20.w, l(0), r15.x
+      iadd r15.x, -r15.x, l(32)
+      ishl r42.xy, r42.yzyy, r15.xxxx
+      and r42.xy, r20.wwww, r42.xyxx
+      ilt r15.x, l(32), r41.x
+      or r40.xy, r41.zwzz, r42.xyxx
+      movc r39.z, r15.x, r40.y, r35.z
+      imin r41.y, r41.x, l(32)
+      mov r40.z, l(0)
+    else
+      iadd r37.z, r39.y, l(-14)
+      ilt r15.x, r37.z, l(14)
+      iadd r42.x, r35.y, r37.y
+      ushr r20.w, r37.x, r37.y
+      ult r21.w, l(0), r37.y
+      iadd r24.z, -r37.y, l(32)
+      ishl r25.w, r35.z, r24.z
+      and r25.w, r21.w, r25.w
+      or r43.y, r20.w, r25.w
+      ilt r20.w, l(32), r40.y
+      ushr r25.w, r35.z, r37.y
+      ishl r17.w, r17.w, r24.z
+      and r17.w, r17.w, r21.w
+      or r17.w, r17.w, r25.w
+      movc r42.y, r20.w, r17.w, r35.z
+      imin r43.w, r41.x, l(32)
+      movc r39.xz, r15.xxxx, r42.xxyx, r35.yyzy
+      mov r43.z, l(0)
+      movc r40.xzw, r15.xxxx, r43.yyzw, r37.xxyz
+      mov r41.xy, r40.ywyy
+    endif
+    ubfe r38.z, r34.w, r40.z, r40.x
+    iadd r40.y, r34.w, r40.z
+    iadd r15.x, r41.x, l(-14)
+    ilt r15.x, r15.x, l(14)
+    if_nz r15.x
+      iadd r15.x, r39.x, r40.y
+      ishr r17.w, r15.x, l(5)
+      ishl r17.w, r17.w, l(2)
+      iadd r17.w, r10.w, r17.w
+      ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r35.yz, r17.w, t0.xxyx
+      and r17.w, r15.x, l(31)
+      ushr r15.x, r35.y, r15.x
+      ult r20.w, l(0), r17.w
+      iadd r17.w, -r17.w, l(32)
+      ishl r17.w, r35.z, r17.w
+      and r17.w, r17.w, r20.w
+      or r37.x, r15.x, r17.w
+      mov r37.y, l(0)
+    else
+      iadd r15.x, r41.y, l(-14)
+      ilt r15.x, r15.x, l(14)
+      and r17.w, r40.y, l(31)
+      ushr r20.w, r40.x, r40.y
+      ult r21.w, l(0), r17.w
+      iadd r17.w, -r17.w, l(32)
+      ishl r17.w, r39.z, r17.w
+      and r17.w, r17.w, r21.w
+      or r39.x, r17.w, r20.w
+      mov r39.y, l(0)
+      movc r37.xy, r15.xxxx, r39.xyxx, r40.xyxx
+    endif
+    ubfe r38.w, r26.w, r37.y, r37.x
+    iadd r37.xyzw, r32.xyzw, r38.xyzw
+    utof r37.xyzw, r37.xyzw
+    mul r37.xyzw, r37.xyzw, l(0.0000610388815, 0.0000610388815, 0.0000610388815, 0.0000610388815)
+  else
+    utof r38.xyzw, r32.xyzw
+    mul r37.xyzw, r38.xyzw, l(0.0000610388815, 0.0000610388815, 0.0000610388815, 0.0000610388815)
+  endif
+  iadd r36.xyzw, r13.wwww, r36.xyzw
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r35.yzw, r36.x, l(48), t9.xxyz
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r38.xyz, r36.x, l(60), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r39.xyz, r36.x, l(72), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r40.xyw, r36.x, l(84), t9.xyxz
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r41.xyz, r36.y, l(48), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r42.xyz, r36.y, l(60), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r43.xyz, r36.y, l(72), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r44.xyw, r36.y, l(84), t9.xyxz
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r45.xyz, r36.z, l(48), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r46.xyz, r36.z, l(60), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r47.xyz, r36.z, l(72), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r48.xyw, r36.z, l(84), t9.xyxz
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r36.xyz, r36.w, l(48), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r49.xyz, r36.w, l(60), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r50.xyz, r36.w, l(72), t9.xyzx
+  ld_structured_indexable(structured_buffer, stride=96)(mixed,mixed,mixed,mixed) r51.xyw, r36.w, l(84), t9.xyxz
+  mov r52.x, r35.y
+  mov r52.y, r38.x
+  mov r52.z, r39.x
+  mov r52.w, r40.x
+  mov r53.x, r35.z
+  mov r53.y, r38.y
+  mov r53.z, r39.y
+  mov r53.w, r40.y
+  mov r40.x, r35.w
+  mov r40.y, r38.z
+  mov r40.z, r39.z
+  mov r38.x, r41.x
+  mov r38.y, r42.x
+  mov r38.z, r43.x
+  mov r38.w, r44.x
+  mul r38.xyzw, r37.yyyy, r38.xyzw
+  mov r39.x, r41.y
+  mov r39.y, r42.y
+  mov r39.z, r43.y
+  mov r39.w, r44.y
+  mul r39.xyzw, r37.yyyy, r39.xyzw
+  mov r44.x, r41.z
+  mov r44.y, r42.z
+  mov r44.z, r43.z
+  mul r41.xyzw, r37.yyyy, r44.xyzw
+  mad r38.xyzw, r52.xyzw, r37.xxxx, r38.xyzw
+  mad r39.xyzw, r53.xyzw, r37.xxxx, r39.xyzw
+  mad r40.xyzw, r40.xyzw, r37.xxxx, r41.xyzw
+  mov r41.x, r45.x
+  mov r41.y, r46.x
+  mov r41.z, r47.x
+  mov r41.w, r48.x
+  mov r42.x, r45.y
+  mov r42.y, r46.y
+  mov r42.z, r47.y
+  mov r42.w, r48.y
+  mov r48.x, r45.z
+  mov r48.y, r46.z
+  mov r48.z, r47.z
+  mad r38.xyzw, r41.xyzw, r37.zzzz, r38.xyzw
+  mad r39.xyzw, r42.xyzw, r37.zzzz, r39.xyzw
+  mad r40.xyzw, r48.xyzw, r37.zzzz, r40.xyzw
+  mov r41.x, r36.x
+  mov r41.y, r49.x
+  mov r41.z, r50.x
+  mov r41.w, r51.x
+  mov r42.x, r36.y
+  mov r42.y, r49.y
+  mov r42.z, r50.y
+  mov r42.w, r51.y
+  mov r51.x, r36.z
+  mov r51.y, r49.z
+  mov r51.z, r50.z
+  mad r36.xyzw, r41.xyzw, r37.wwww, r38.xyzw
+  mad r38.xyzw, r42.xyzw, r37.wwww, r39.xyzw
+  mad r37.xyzw, r51.xyzw, r37.wwww, r40.xyzw
+  mov r23.w, l(1.000000)
+  dp4 r39.x, r36.xyzw, r23.xyzw
+  dp4 r39.y, r38.xyzw, r23.xyzw
+  dp4 r39.z, r37.xyzw, r23.xyzw
+  dp3 r23.x, r36.xyzx, r27.xyzx
+  dp3 r23.y, r38.xyzx, r27.xyzx
+  dp3 r23.z, r37.xyzx, r27.xyzx
+  dp3 r27.x, r36.xyzx, r28.xyzx
+  dp3 r27.y, r38.xyzx, r28.xyzx
+  dp3 r27.z, r37.xyzx, r28.xyzx
+  switch cb0[0].x
+    case l(0)
+    mov r13.w, l(0)
+    break
+    case l(1)
+    mov r13.w, l(-1)
+    break
+    case l(2)
+    mov r13.w, l(-1)
+    break
+    case l(3)
+    mov r13.w, l(-1)
+    break
+    case l(4)
+    mov r13.w, l(-1)
+    break
+    case l(5)
+    mov r13.w, l(-1)
+    break
+    case l(6)
+    mov r13.w, l(-1)
+    break
+    case l(7)
+    mov r13.w, l(-1)
+    break
+    case l(8)
+    mov r13.w, l(-1)
+    break
+    case l(9)
+    mov r13.w, l(-1)
+    break
+    case l(10)
+    mov r13.w, l(-1)
+    break
+    case l(11)
+    mov r13.w, l(-1)
+    break
+    case l(12)
+    mov r13.w, l(-1)
+    break
+    case l(13)
+    mov r13.w, l(0)
+    break
+    case l(14)
+    mov r13.w, l(-1)
+    break
+    case l(15)
+    mov r13.w, l(-1)
+    break
+    case l(16)
+    mov r13.w, l(-1)
+    break
+    case l(17)
+    mov r13.w, l(-1)
+    break
+    case l(18)
+    mov r13.w, l(-1)
+    break
+    case l(19)
+    mov r13.w, l(-1)
+    break
+    case l(20)
+    mov r13.w, l(-1)
+    break
+    case l(21)
+    mov r13.w, l(-1)
+    break
+    case l(22)
+    mov r13.w, l(-1)
+    break
+    case l(23)
+    mov r13.w, l(-1)
+    break
+    case l(24)
+    mov r13.w, l(-1)
+    break
+    case l(25)
+    mov r13.w, l(-1)
+    break
+    case l(26)
+    mov r13.w, l(-1)
+    break
+    case l(27)
+    mov r13.w, l(-1)
+    break
+    case l(28)
+    mov r13.w, l(-1)
+    break
+    case l(29)
+    mov r13.w, l(-1)
+    break
+    case l(30)
+    mov r13.w, l(-1)
+    break
+    case l(31)
+    mov r13.w, l(-1)
+    break
+    case l(42)
+    case l(43)
+    case l(44)
+    case l(45)
+    mov r13.w, l(-1)
+    break
+    case l(32)
+    mov r13.w, l(-1)
+    break
+    case l(33)
+    mov r13.w, l(-1)
+    break
+    case l(34)
+    mov r13.w, l(-1)
+    break
+    case l(35)
+    mov r13.w, l(-1)
+    break
+    case l(36)
+    mov r13.w, l(-1)
+    break
+    default
+    mov r13.w, l(0)
+    break
+  endswitch
+  if_nz r13.w
+    ieq r13.w, cb0[0].x, l(1)
+    if_nz r13.w
+      iadd r5.w, r5.w, l(1)
+      ushr r13.w, r5.w, l(16)
+      xor r5.w, r5.w, r13.w
+      imul null, r5.w, r5.w, l(0x85ebca6b)
+      ushr r13.w, r5.w, l(13)
+      xor r5.w, r5.w, r13.w
+      imul null, r5.w, r5.w, l(0xc2b2ae35)
+      ushr r13.w, r5.w, l(16)
+      xor r5.w, r5.w, r13.w
+      and r13.w, r5.w, l(255)
+      ubfe r28.xy, l(8, 8, 0, 0), l(8, 16, 0, 0), r5.wwww
+      utof r36.x, r13.w
+      utof r36.yz, r28.xxyx
+      mul o5.xyz, r36.xyzx, l(0.00392156886, 0.00392156886, 0.00392156886, 0.000000)
+      mov o5.w, l(0.00392156886)
+    else
+      ieq r5.w, cb0[0].x, l(2)
+      if_nz r5.w
+        iadd r3.z, r3.z, l(1)
+        xor r3.z, r3.z, l(0)
+        imul null, r3.z, r3.z, l(0x85ebca6b)
+        ushr r5.w, r3.z, l(13)
+        xor r3.z, r3.z, r5.w
+        imul null, r3.z, r3.z, l(0xc2b2ae35)
+        ushr r5.w, r3.z, l(16)
+        xor r3.z, r3.z, r5.w
+        and r5.w, r3.z, l(255)
+        ubfe r28.xy, l(8, 8, 0, 0), l(8, 16, 0, 0), r3.zzzz
+        utof r36.x, r5.w
+        utof r36.yz, r28.xxyx
+        mul o5.xyz, r36.xyzx, l(0.00392156886, 0.00392156886, 0.00392156886, 0.000000)
+        mov o5.w, l(0.00392156886)
+      else
+        ushr r3.z, r12.w, l(16)
+        ieq r5.w, cb0[0].x, l(5)
+        if_nz r5.w
+          iadd r5.w, r3.z, l(1)
+          ushr r13.w, r5.w, l(16)
+          xor r5.w, r5.w, r13.w
+          imul null, r5.w, r5.w, l(0x85ebca6b)
+          ushr r13.w, r5.w, l(13)
+          xor r5.w, r5.w, r13.w
+          imul null, r5.w, r5.w, l(0xc2b2ae35)
+          ushr r13.w, r5.w, l(16)
+          xor r5.w, r5.w, r13.w
+          and r13.w, r5.w, l(255)
+          ubfe r28.xy, l(8, 8, 0, 0), l(8, 16, 0, 0), r5.wwww
+          utof r36.x, r13.w
+          utof r36.yz, r28.xxyx
+          mul o5.xyz, r36.xyzx, l(0.00392156886, 0.00392156886, 0.00392156886, 0.000000)
+          mov o5.w, l(0.00392156886)
+        else
+          ieq r5.w, cb0[0].x, l(6)
+          if_nz r5.w
+            iadd r3.y, r3.y, l(1)
+            ushr r5.w, r3.y, l(16)
+            xor r3.y, r3.y, r5.w
+            imul null, r3.y, r3.y, l(0x85ebca6b)
+            ushr r5.w, r3.y, l(13)
+            xor r3.y, r3.y, r5.w
+            imul null, r3.y, r3.y, l(0xc2b2ae35)
+            ushr r5.w, r3.y, l(16)
+            xor r3.y, r3.y, r5.w
+            and r5.w, r3.y, l(255)
+            ubfe r28.xy, l(8, 8, 0, 0), l(8, 16, 0, 0), r3.yyyy
+            utof r36.x, r5.w
+            utof r36.yz, r28.xxyx
+            mul o5.xyz, r36.xyzx, l(0.00392156886, 0.00392156886, 0.00392156886, 0.000000)
+            mov o5.w, l(0.00392156886)
+          else
+            ieq r28.xy, cb0[0].xxxx, l(3, 36, 0, 0)
+            or r3.y, r28.y, r28.x
+            if_nz r3.y
+              ubfe r3.y, l(8), l(16), r2.w
+              ubfe r3.x, l(8), l(8), r3.x
+              utof r28.xy, r3.yxyy
+              and r2.w, r2.w, l(255)
+              utof r28.z, r2.w
+              mov r28.w, l(0)
+              div o5.xyzw, r28.xyzw, l(255.000000, 255.000000, 255.000000, 255.000000)
+            else
+              ieq r3.xy, cb0[0].xxxx, l(4, 35, 0, 0)
+              or r2.w, r3.y, r3.x
+              if_nz r2.w
+                ubfe r3.xy, l(8, 8, 0, 0), l(16, 8, 0, 0), r2.zzzz
+                utof r28.xy, r3.xyxx
+                and r2.w, r10.y, l(255)
+                utof r28.z, r2.w
+                ubfe r2.w, l(7), l(24), r10.y
+                utof r28.w, r2.w
+                mul o5.xyzw, r28.xyzw, l(0.00392156886, 0.00392156886, 0.00392156886, 0.00392156886)
+              else
+                ushr r2.w, r14.y, l(27)
+                ieq r3.x, cb0[0].x, l(7)
+                if_nz r3.x
+                  utof r3.x, r2.w
+                  mad r3.x, -r3.x, l(0.062500), l(1.000000)
+                  mad r28.xyz, r3.xxxx, l(-52.889034, -21.545273, 110.517464, 0.000000), l(218.763718, 67.521507, -305.204590, 0.000000)
+                  mad r28.xyz, r3.xxxx, r28.xyzx, l(-334.835144, -69.317497, 288.585876, 0.000000)
+                  mad r28.xyz, r3.xxxx, r28.xyzx, l(228.766083, 25.049868, -91.541054, 0.000000)
+                  mad r28.xyz, r3.xxxx, r28.xyzx, l(-66.094025, -4.927983, -10.094394, 0.000000)
+                  mad r28.xyz, r3.xxxx, r28.xyzx, l(6.71641970, 3.18228674, 7.57158136, 0.000000)
+                  mad o5.xyz, r3.xxxx, r28.xyzx, l(0.114089012, 0.0628834069, 0.224833727, 0.000000)
+                  mov o5.w, l(1.000000)
+                else
+                  ieq r3.x, cb0[0].x, l(9)
+                  if_nz r3.x
+                    iadd r3.x, r3.z, l(1)
+                    ushr r3.y, r3.x, l(16)
+                    xor r3.x, r3.y, r3.x
+                    imul null, r3.x, r3.x, l(0x85ebca6b)
+                    ushr r3.y, r3.x, l(13)
+                    xor r3.x, r3.y, r3.x
+                    imul null, r3.x, r3.x, l(0xc2b2ae35)
+                    ushr r3.y, r3.x, l(16)
+                    xor r3.x, r3.y, r3.x
+                    and r3.y, r3.x, l(255)
+                    ubfe r3.xz, l(8, 0, 8, 0), l(8, 0, 16, 0), r3.xxxx
+                    utof r28.xyz, r3.yxzy
+                    mul o5.xyz, r28.xyzx, l(0.00392156886, 0.00392156886, 0.00392156886, 0.000000)
+                    mov o5.w, l(0.00392156886)
+                  else
+                    ieq r3.x, cb0[0].x, l(10)
+                    if_nz r3.x
+                      mad o5.xyz, r25.xyzx, l(0.500000, 0.500000, 0.500000, 0.000000), l(0.500000, 0.500000, 0.500000, 0.000000)
+                      mov o5.w, l(1.000000)
+                    else
+                      ieq r3.x, cb0[0].x, l(11)
+                      if_nz r3.x
+                        mov o5.xyzw, r19.xyzw
+                      else
+                        or r3.x, r11.y, l(28)
+                        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r3.x, r3.x, t3.xxxx
+                        ieq r3.y, cb0[0].x, l(12)
+                        if_nz r3.y
+                          utof r3.y, r3.x
+                          mul r3.z, r3.y, l(0.062500)
+                          mad r19.xyz, r3.yyyy, l(-3.30556464, -1.34657955, 6.90734148, 0.000000), l(218.763718, 67.521507, -305.204590, 0.000000)
+                          mad r19.xyz, r3.zzzz, r19.xyzx, l(-334.835144, -69.317497, 288.585876, 0.000000)
+                          mad r19.xyz, r3.zzzz, r19.xyzx, l(228.766083, 25.049868, -91.541054, 0.000000)
+                          mad r19.xyz, r3.zzzz, r19.xyzx, l(-66.094025, -4.927983, -10.094394, 0.000000)
+                          mad r19.xyz, r3.zzzz, r19.xyzx, l(6.71641970, 3.18228674, 7.57158136, 0.000000)
+                          mad o5.xyz, r3.zzzz, r19.xyzx, l(0.114089012, 0.0628834069, 0.224833727, 0.000000)
+                          mov o5.w, l(1.000000)
+                        else
+                          ieq r3.y, cb0[0].x, l(8)
+                          if_nz r3.y
+                            utof r2.w, r2.w
+                            iadd r3.x, r3.x, l(1)
+                            utof r3.x, r3.x
+                            div r2.w, r2.w, r3.x
+                            add r2.w, -r2.w, l(1.000000)
+                            mad r3.xyz, r2.wwww, l(-52.889034, -21.545273, 110.517464, 0.000000), l(218.763718, 67.521507, -305.204590, 0.000000)
+                            mad r3.xyz, r2.wwww, r3.xyzx, l(-334.835144, -69.317497, 288.585876, 0.000000)
+                            mad r3.xyz, r2.wwww, r3.xyzx, l(228.766083, 25.049868, -91.541054, 0.000000)
+                            mad r3.xyz, r2.wwww, r3.xyzx, l(-66.094025, -4.927983, -10.094394, 0.000000)
+                            mad r3.xyz, r2.wwww, r3.xyzx, l(6.71641970, 3.18228674, 7.57158136, 0.000000)
+                            mad o5.xyz, r2.wwww, r3.xyzx, l(0.114089012, 0.0628834069, 0.224833727, 0.000000)
+                            mov o5.w, l(1.000000)
+                          else
+                            ieq r2.w, cb0[0].x, l(15)
+                            if_nz r2.w
+                              mad r3.xyz, r24.xywx, l(0.500000, 0.500000, 0.500000, 0.000000), l(0.500000, 0.500000, 0.500000, 0.000000)
+                              udiv null, r2.w, r8.w, l(3)
+                              iadd r2.w, -r2.w, r8.w
+                              iadd r19.xy, r8.wwww, l(2, 1, 0, 0)
+                              udiv null, r19.xy, r19.xyxx, l(3, 3, 0, 0)
+                              iadd r19.xy, r2.wwww, r19.xyxx
+                              ineg r19.zw, r19.xxxy
+                              ult r28.xyzw, r19.xxyy, l(1, 2, 1, 2)
+                              and r36.xy, r19.zwzz, r28.ywyy
+                              iadd r19.xy, r19.xyxx, l(-3, -3, 0, 0)
+                              movc r19.xy, r28.ywyy, l(0,0,0,0), r19.xyxx
+                              mov r36.z, r28.x
+                              mov r36.w, r19.x
+                              and r37.xyz, r20.xyzx, r36.zxwz
+                              mov r37.w, l(0)
+                              or r28.xy, r37.ywyy, r37.xzxx
+                              or r2.w, r28.y, r28.x
+                              iadd r5.w, r16.w, r16.z
+                              iadd r5.w, r15.z, r5.w
+                              imul null, r10.y, r2.w, r5.w
+                              iadd r13.w, r9.y, r11.w
+                              ushr r14.y, r10.y, l(5)
+                              ishl r14.y, r14.y, l(2)
+                              iadd r14.y, r13.w, r14.y
+                              ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r28.xyw, r14.y, t0.xyxz
+                              and r14.y, r10.y, l(31)
+                              ushr r35.yz, r28.xxyx, r10.yyyy
+                              ult r10.y, l(0), r14.y
+                              iadd r14.y, -r14.y, l(32)
+                              ishl r28.xy, r28.ywyy, r14.yyyy
+                              and r28.xy, r10.yyyy, r28.xyxx
+                              or r28.xy, r28.xyxx, r35.yzyy
+                              ubfe r37.y, r17.x, l(0), r28.x
+                              ushr r28.xw, r28.xxxy, r17.xxxx
+                              ult r35.yz, l(0, 0, 0, 0), r16.zzwz
+                              iadd r36.xz, -r16.zzwz, l(32, 0, 32, 0)
+                              ishl r10.y, r28.y, r36.x
+                              and r10.y, r10.y, r35.y
+                              or r10.y, r10.y, r28.x
+                              ubfe r37.z, r17.y, l(0), r10.y
+                              ushr r10.y, r10.y, r17.y
+                              ishl r14.y, r28.w, r36.z
+                              and r14.y, r14.y, r35.z
+                              or r10.y, r10.y, r14.y
+                              ubfe r37.x, r17.z, l(0), r10.y
+                              ishl r10.y, r12.x, l(23)
+                              iadd r10.y, -r10.y, l(0x3f800000)
+                              iadd r28.xyw, r13.zxzy, r37.xyxz
+                              itof r28.xyw, r28.xyxw
+                              mov r19.z, r28.z
+                              mov r19.w, r36.y
+                              and r19.xyz, r19.zwyz, r20.xyzx
+                              mov r19.w, l(0)
+                              or r19.xy, r19.ywyy, r19.xzxx
+                              or r14.y, r19.y, r19.x
+                              imul null, r5.w, r5.w, r14.y
+                              ushr r15.x, r5.w, l(5)
+                              ishl r15.x, r15.x, l(2)
+                              iadd r13.w, r13.w, r15.x
+                              ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r19.xyz, r13.w, t0.xyzx
+                              and r13.w, r5.w, l(31)
+                              ushr r19.xw, r19.xxxy, r5.wwww
+                              ult r5.w, l(0), r13.w
+                              iadd r13.w, -r13.w, l(32)
+                              ishl r19.yz, r19.yyzy, r13.wwww
+                              and r19.yz, r5.wwww, r19.yyzy
+                              or r19.xy, r19.yzyy, r19.xwxx
+                              ubfe r37.z, r17.x, l(0), r19.x
+                              ushr r19.xz, r19.xxyx, r17.xxxx
+                              ishl r5.w, r19.y, r36.x
+                              and r5.w, r5.w, r35.y
+                              or r5.w, r5.w, r19.x
+                              ubfe r37.x, r17.y, l(0), r5.w
+                              ushr r5.w, r5.w, r17.y
+                              ishl r13.w, r19.z, r36.z
+                              and r13.w, r13.w, r35.z
+                              or r5.w, r5.w, r13.w
+                              ubfe r37.y, r17.z, l(0), r5.w
+                              iadd r19.xyz, r13.yzxy, r37.xyzx
+                              itof r19.xyz, r19.xyzx
+                              iadd r35.yz, r9.yyyy, r18.xxyx
+                              mov x2[3].x, l(0)
+                              and r5.w, r12.w, l(15)
+                              ubfe r36.xy, l(4, 4, 0, 0), l(4, 8, 0, 0), r15.yyyy
+                              ubfe r13.w, l(4), l(12), r12.w
+                              imul null, r15.x, r16.y, r2.w
+                              ishr r17.w, r15.x, l(5)
+                              ishl r17.w, r17.w, l(2)
+                              iadd r17.w, r17.w, r35.z
+                              ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r37.xyzw, r17.w, t0.xyzw
+                              and r17.w, r15.x, l(31)
+                              ushr r38.xyz, r37.xyzx, r15.xxxx
+                              ult r19.w, l(0), r17.w
+                              iadd r17.w, -r17.w, l(32)
+                              ishl r37.xyz, r37.yzwy, r17.wwww
+                              and r37.xyz, r19.wwww, r37.xyzx
+                              or r37.xyz, r37.xyzx, r38.xyzx
+                              mov x3[1].x, r15.x
+                              mov x3[2].xyz, r37.xyzx
+                              mov x3[3].x, l(18)
+                              mov x3[4].x, l(73)
+                              mov x3[5].x, l(14)
+                              mov x3[6].x, l(73)
+                              if_nz r15.w
+                                imad r2.w, r2.w, r16.y, l(18)
+                                ushr r38.xyz, r37.xyzx, l(18, 18, 18, 0)
+                                bfi r38.xy, l(18, 18, 0, 0), l(14, 14, 0, 0), r37.yzyy, r38.xyxx
+                                mov x3[1].x, r2.w
+                                mov x3[2].xyz, r38.xyzx
+                                mov x3[3].x, l(19)
+                                mov x3[4].x, l(54)
+                                mov x3[5].x, l(13)
+                                mov x3[6].x, l(54)
+                              endif
+                              mov r37.x, x3[1].x
+                              mov r37.yzw, x3[2].xxyz
+                              mov r38.z, x3[3].x
+                              mov r40.y, x3[4].x
+                              mov r2.w, x3[6].x
+                              ilt r15.x, r40.y, l(8)
+                              if_nz r15.x
+                                iadd r41.x, r37.x, r38.z
+                                ishr r15.x, r41.x, l(5)
+                                ishl r15.x, r15.x, l(2)
+                                iadd r15.x, r15.x, r35.z
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r42.xyzw, r15.x, t0.xyzw
+                                and r15.x, r41.x, l(31)
+                                ushr r43.xyzw, r42.xyzw, r41.xxxx
+                                ult r17.w, l(0), r15.x
+                                iadd r15.x, -r15.x, l(32)
+                                ishl r42.xyz, r42.yzwy, r15.xxxx
+                                and r42.xyz, r17.wwww, r42.xyzx
+                                ilt r44.xyz, l(32, 64, 96, 0), r2.wwww
+                                or r42.xyz, r42.xyzx, r43.xyzx
+                                movc r41.zw, r44.xxxy, r42.yyyz, r37.zzzw
+                                and r43.y, r43.w, r44.z
+                                imin r40.yz, r2.wwww, l(0, 97, 32, 0)
+                                mov r41.y, r42.x
+                                mov r40.x, l(0)
+                                mov r43.x, r41.w
+                              else
+                                mov r38.w, x3[5].x
+                                ilt r15.x, r38.w, l(8)
+                                iadd r42.x, r37.x, r38.z
+                                and r17.w, r38.z, l(31)
+                                ushr r44.xyz, r37.yzwy, r38.zzzz
+                                ult r19.w, l(0), r17.w
+                                iadd r17.w, -r17.w, l(32)
+                                ishl r36.zw, r37.zzzw, r17.wwww
+                                and r36.zw, r19.wwww, r36.zzzw
+                                ilt r45.xy, l(32, 64, 0, 0), r40.yyyy
+                                or r42.yz, r36.zzwz, r44.xxyx
+                                movc r42.w, r45.x, r42.z, r37.z
+                                movc r44.x, r45.y, r44.z, r37.w
+                                imin r44.w, r2.w, l(32)
+                                movc r41.xyz, r15.xxxx, r42.xywx, r37.xyzx
+                                mov r44.yz, l(0,0,0,0)
+                                mov r38.x, r37.w
+                                mov r38.y, l(0)
+                                movc r43.xyzw, r15.xxxx, r44.xyzw, r38.xyzw
+                                mov r40.xz, r43.zzwz
+                              endif
+                              iadd r43.z, r5.w, r40.x
+                              iadd r37.y, r40.y, l(-8)
+                              iadd r38.xyz, r2.wwww, l(-8, -16, -24, 0)
+                              ilt r2.w, r37.y, l(8)
+                              if_nz r2.w
+                                iadd r42.x, r41.x, r43.z
+                                ishr r2.w, r42.x, l(5)
+                                ishl r2.w, r2.w, l(2)
+                                iadd r2.w, r2.w, r35.z
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r44.xyzw, r2.w, t0.xyzw
+                                and r2.w, r42.x, l(31)
+                                ushr r45.xyzw, r44.xyzw, r42.xxxx
+                                ult r15.x, l(0), r2.w
+                                iadd r2.w, -r2.w, l(32)
+                                ishl r40.xyw, r44.yzyw, r2.wwww
+                                and r40.xyw, r15.xxxx, r40.xyxw
+                                ilt r44.xyz, l(32, 64, 96, 0), r38.xxxx
+                                or r40.xyw, r40.xyxw, r45.xyxz
+                                movc r42.z, r44.x, r40.y, r41.z
+                                movc r45.x, r44.y, r40.w, r43.x
+                                movc r44.x, r44.z, r45.w, r43.y
+                                imin r37.yz, r38.xxxx, l(0, 97, 32, 0)
+                                mov r42.y, r40.x
+                                mov r37.x, l(0)
+                              else
+                                iadd r43.w, r40.z, l(-8)
+                                ilt r2.w, r43.w, l(8)
+                                iadd r40.x, r41.x, r43.z
+                                and r15.x, r43.z, l(31)
+                                ushr r36.zw, r41.yyyz, r43.zzzz
+                                ult r17.w, l(0), r15.x
+                                iadd r15.x, -r15.x, l(32)
+                                ishl r19.w, r41.z, r15.x
+                                and r19.w, r17.w, r19.w
+                                or r40.y, r19.w, r36.z
+                                ilt r46.xyz, l(32, 64, 96, 0), r37.yyyy
+                                ishl r47.xy, r43.xyxx, r15.xxxx
+                                and r47.xy, r17.wwww, r47.xyxx
+                                or r15.x, r36.w, r47.x
+                                movc r40.z, r46.x, r15.x, r41.z
+                                ushr r36.zw, r43.xxxy, r43.zzzz
+                                or r15.x, r47.y, r36.z
+                                movc r47.x, r46.y, r15.x, r43.x
+                                movc r47.y, r46.z, r36.w, r43.y
+                                imin r47.w, r38.x, l(32)
+                                movc r42.xyz, r2.wwww, r40.xyzx, r41.xyzx
+                                mov r47.z, l(0)
+                                movc r44.xyzw, r2.wwww, r47.yxzw, r43.yxzw
+                                mov r37.xz, r44.zzwz
+                                mov r45.x, r44.y
+                              endif
+                              iadd r45.y, r36.x, r37.x
+                              iadd r40.y, r37.y, l(-8)
+                              ilt r2.w, r40.y, l(8)
+                              if_nz r2.w
+                                iadd r41.x, r42.x, r45.y
+                                ishr r2.w, r41.x, l(5)
+                                ishl r2.w, r2.w, l(2)
+                                iadd r2.w, r2.w, r35.z
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r43.xyzw, r2.w, t0.xyzw
+                                and r2.w, r41.x, l(31)
+                                ushr r37.xyw, r43.xyxz, r41.xxxx
+                                ult r15.x, l(0), r2.w
+                                iadd r2.w, -r2.w, l(32)
+                                ishl r43.xyz, r43.yzwy, r2.wwww
+                                and r43.xyz, r15.xxxx, r43.xyzx
+                                ilt r36.zw, l(0, 0, 32, 64), r38.yyyy
+                                or r37.xyw, r37.xyxw, r43.xyxz
+                                movc r41.z, r36.z, r37.y, r42.z
+                                movc r40.w, r36.w, r37.w, r45.x
+                                imin r40.yz, r38.yyyy, l(0, 97, 32, 0)
+                                mov r41.y, r37.x
+                                mov r40.x, l(0)
+                              else
+                                iadd r45.z, r37.z, l(-8)
+                                ilt r2.w, r45.z, l(8)
+                                iadd r37.x, r42.x, r45.y
+                                and r15.x, r45.y, l(31)
+                                ushr r36.zw, r42.yyyz, r45.yyyy
+                                ult r17.w, l(0), r15.x
+                                iadd r15.x, -r15.x, l(32)
+                                ishl r19.w, r42.z, r15.x
+                                and r19.w, r17.w, r19.w
+                                or r37.y, r19.w, r36.z
+                                ilt r38.xw, l(32, 0, 0, 64), r40.yyyy
+                                ishl r19.w, r45.x, r15.x
+                                and r19.w, r17.w, r19.w
+                                or r19.w, r19.w, r36.w
+                                movc r37.z, r38.x, r19.w, r42.z
+                                ushr r19.w, r45.x, r45.y
+                                ishl r15.x, r44.x, r15.x
+                                and r15.x, r15.x, r17.w
+                                or r15.x, r15.x, r19.w
+                                movc r43.x, r38.w, r15.x, r45.x
+                                imin r43.z, r38.y, l(32)
+                                movc r41.xyz, r2.wwww, r37.xyzx, r42.xyzx
+                                mov r43.y, l(0)
+                                movc r40.xzw, r2.wwww, r43.yyzx, r45.yyzx
+                              endif
+                              iadd r37.x, r36.y, r40.x
+                              iadd r42.y, r40.y, l(-8)
+                              ilt r2.w, r42.y, l(8)
+                              if_nz r2.w
+                                iadd r2.w, r37.x, r41.x
+                                ishr r15.x, r2.w, l(5)
+                                ishl r15.x, r15.x, l(2)
+                                iadd r15.x, r15.x, r35.z
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r38.xyw, r15.x, t0.xyxz
+                                and r15.x, r2.w, l(31)
+                                ushr r36.zw, r38.xxxy, r2.wwww
+                                ult r17.w, l(0), r15.x
+                                iadd r15.x, -r15.x, l(32)
+                                ishl r37.yw, r38.yyyw, r15.xxxx
+                                and r37.yw, r17.wwww, r37.yyyw
+                                ilt r15.x, l(32), r38.z
+                                or r38.xy, r36.zwzz, r37.ywyy
+                                movc r38.w, r15.x, r38.y, r41.z
+                                imin r42.yz, r38.zzzz, l(0, 97, 32, 0)
+                                mov r42.x, l(0)
+                              else
+                                iadd r37.z, r40.z, l(-8)
+                                ilt r15.x, r37.z, l(8)
+                                iadd r40.x, r37.x, r41.x
+                                and r17.w, r37.x, l(31)
+                                ushr r36.zw, r41.yyyz, r37.xxxx
+                                ult r19.w, l(0), r17.w
+                                iadd r17.w, -r17.w, l(32)
+                                ishl r20.w, r41.z, r17.w
+                                and r20.w, r19.w, r20.w
+                                or r40.y, r20.w, r36.z
+                                ilt r20.w, l(32), r42.y
+                                ishl r17.w, r40.w, r17.w
+                                and r17.w, r17.w, r19.w
+                                or r17.w, r17.w, r36.w
+                                movc r40.z, r20.w, r17.w, r41.z
+                                imin r43.z, r38.z, l(32)
+                                movc r38.xyw, r15.xxxx, r40.yxyz, r41.yxyz
+                                mov r43.x, l(0)
+                                movc r42.xz, r15.xxxx, r43.xxzx, r37.xxzx
+                                mov r2.w, r38.y
+                              endif
+                              iadd r38.y, r13.w, r42.x
+                              iadd r15.x, r42.y, l(-8)
+                              and r17.w, r14.z, l(15)
+                              ilt r15.x, r15.x, l(15)
+                              if_nz r15.x
+                                iadd r2.w, r2.w, r38.y
+                                ishr r15.x, r2.w, l(5)
+                                ishl r15.x, r15.x, l(2)
+                                iadd r15.x, r15.x, r35.z
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r36.zw, r15.x, t0.xxxy
+                                and r15.x, r2.w, l(31)
+                                ushr r2.w, r36.z, r2.w
+                                ult r19.w, l(0), r15.x
+                                iadd r15.x, -r15.x, l(32)
+                                ishl r15.x, r36.w, r15.x
+                                and r15.x, r15.x, r19.w
+                                or r38.x, r2.w, r15.x
+                                mov r38.y, l(0)
+                              else
+                                iadd r2.w, r42.z, l(-8)
+                                ilt r2.w, r2.w, l(15)
+                                if_nz r2.w
+                                  and r2.w, r38.y, l(31)
+                                  ushr r15.x, r38.x, r38.y
+                                  ult r19.w, l(0), r2.w
+                                  iadd r2.w, -r2.w, l(32)
+                                  ishl r2.w, r38.w, r2.w
+                                  and r2.w, r2.w, r19.w
+                                  or r38.x, r2.w, r15.x
+                                  mov r38.y, l(0)
+                                endif
+                              endif
+                              if_nz r14.x
+                                ubfe r2.w, r17.w, r38.y, r38.x
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r15.x, r35.y, t0.xxxx
+                                iadd r37.xyz, r35.yyyy, l(8, 16, 24, 0)
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r19.w, r37.x, t0.xxxx
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r20.w, r37.y, t0.xxxx
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r21.w, r37.z, t0.xxxx
+                                ult r19.w, r19.w, r2.w
+                                and r19.w, r20.w, r19.w
+                                iadd r2.w, r2.w, r19.w
+                                ishl r19.w, r21.w, l(23)
+                                iadd r19.w, -r19.w, l(0x3f800000)
+                                iadd r2.w, r15.x, r2.w
+                                itof r2.w, r2.w
+                                mul r2.w, r19.w, r2.w
+                                mov x2[3].x, r2.w
+                              endif
+                              mov r2.w, x2[3].x
+                              mov x4[3].x, l(0)
+                              imul null, r15.x, r16.y, r14.y
+                              ishr r19.w, r15.x, l(5)
+                              ishl r19.w, r19.w, l(2)
+                              iadd r19.w, r19.w, r35.z
+                              ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r37.xyzw, r19.w, t0.xyzw
+                              and r19.w, r15.x, l(31)
+                              ushr r38.xyz, r37.xyzx, r15.xxxx
+                              ult r20.w, l(0), r19.w
+                              iadd r19.w, -r19.w, l(32)
+                              ishl r37.xyz, r37.yzwy, r19.wwww
+                              and r37.xyz, r20.wwww, r37.xyzx
+                              or r37.xyz, r37.xyzx, r38.xyzx
+                              mov x5[1].x, r15.x
+                              mov x5[2].xyz, r37.xyzx
+                              mov x5[3].x, l(18)
+                              mov x5[4].x, l(73)
+                              mov x5[5].x, l(14)
+                              mov x5[6].x, l(73)
+                              if_nz r15.w
+                                imad r14.y, r14.y, r16.y, l(18)
+                                ushr r38.xyz, r37.xyzx, l(18, 18, 18, 0)
+                                bfi r38.xy, l(18, 18, 0, 0), l(14, 14, 0, 0), r37.yzyy, r38.xyxx
+                                mov x5[1].x, r14.y
+                                mov x5[2].xyz, r38.xyzx
+                                mov x5[3].x, l(19)
+                                mov x5[4].x, l(54)
+                                mov x5[5].x, l(13)
+                                mov x5[6].x, l(54)
+                              endif
+                              mov r37.x, x5[1].x
+                              mov r37.yzw, x5[2].xxyz
+                              mov r38.z, x5[3].x
+                              mov r40.y, x5[4].x
+                              mov r14.y, x5[6].x
+                              ilt r15.x, r40.y, l(8)
+                              if_nz r15.x
+                                iadd r41.x, r37.x, r38.z
+                                ishr r15.x, r41.x, l(5)
+                                ishl r15.x, r15.x, l(2)
+                                iadd r15.x, r15.x, r35.z
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r42.xyzw, r15.x, t0.xyzw
+                                and r15.x, r41.x, l(31)
+                                ushr r43.xyzw, r42.xyzw, r41.xxxx
+                                ult r19.w, l(0), r15.x
+                                iadd r15.x, -r15.x, l(32)
+                                ishl r42.xyz, r42.yzwy, r15.xxxx
+                                and r42.xyz, r19.wwww, r42.xyzx
+                                ilt r44.xyz, l(32, 64, 96, 0), r14.yyyy
+                                or r42.xyz, r42.xyzx, r43.xyzx
+                                movc r41.zw, r44.xxxy, r42.yyyz, r37.zzzw
+                                and r43.y, r43.w, r44.z
+                                imin r40.yz, r14.yyyy, l(0, 97, 32, 0)
+                                mov r41.y, r42.x
+                                mov r40.x, l(0)
+                                mov r43.x, r41.w
+                              else
+                                mov r38.w, x5[5].x
+                                ilt r15.x, r38.w, l(8)
+                                iadd r42.x, r37.x, r38.z
+                                and r19.w, r38.z, l(31)
+                                ushr r44.xyz, r37.yzwy, r38.zzzz
+                                ult r20.w, l(0), r19.w
+                                iadd r19.w, -r19.w, l(32)
+                                ishl r36.zw, r37.zzzw, r19.wwww
+                                and r36.zw, r20.wwww, r36.zzzw
+                                ilt r45.xy, l(32, 64, 0, 0), r40.yyyy
+                                or r42.yz, r36.zzwz, r44.xxyx
+                                movc r42.w, r45.x, r42.z, r37.z
+                                movc r44.x, r45.y, r44.z, r37.w
+                                imin r44.w, r14.y, l(32)
+                                movc r41.xyz, r15.xxxx, r42.xywx, r37.xyzx
+                                mov r44.yz, l(0,0,0,0)
+                                mov r38.x, r37.w
+                                mov r38.y, l(0)
+                                movc r43.xyzw, r15.xxxx, r44.xyzw, r38.xyzw
+                                mov r40.xz, r43.zzwz
+                              endif
+                              iadd r43.z, r5.w, r40.x
+                              iadd r37.y, r40.y, l(-8)
+                              iadd r38.xyz, r14.yyyy, l(-8, -16, -24, 0)
+                              ilt r5.w, r37.y, l(8)
+                              if_nz r5.w
+                                iadd r42.x, r41.x, r43.z
+                                ishr r5.w, r42.x, l(5)
+                                ishl r5.w, r5.w, l(2)
+                                iadd r5.w, r5.w, r35.z
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r44.xyzw, r5.w, t0.xyzw
+                                and r5.w, r42.x, l(31)
+                                ushr r45.xyzw, r44.xyzw, r42.xxxx
+                                ult r14.y, l(0), r5.w
+                                iadd r5.w, -r5.w, l(32)
+                                ishl r40.xyw, r44.yzyw, r5.wwww
+                                and r40.xyw, r14.yyyy, r40.xyxw
+                                ilt r44.xyz, l(32, 64, 96, 0), r38.xxxx
+                                or r40.xyw, r40.xyxw, r45.xyxz
+                                movc r42.z, r44.x, r40.y, r41.z
+                                movc r45.x, r44.y, r40.w, r43.x
+                                movc r44.x, r44.z, r45.w, r43.y
+                                imin r37.yz, r38.xxxx, l(0, 97, 32, 0)
+                                mov r42.y, r40.x
+                                mov r37.x, l(0)
+                              else
+                                iadd r43.w, r40.z, l(-8)
+                                ilt r5.w, r43.w, l(8)
+                                iadd r40.x, r41.x, r43.z
+                                and r14.y, r43.z, l(31)
+                                ushr r36.zw, r41.yyyz, r43.zzzz
+                                ult r15.x, l(0), r14.y
+                                iadd r14.y, -r14.y, l(32)
+                                ishl r19.w, r41.z, r14.y
+                                and r19.w, r15.x, r19.w
+                                or r40.y, r19.w, r36.z
+                                ilt r46.xyz, l(32, 64, 96, 0), r37.yyyy
+                                ishl r47.xy, r43.xyxx, r14.yyyy
+                                and r47.xy, r15.xxxx, r47.xyxx
+                                or r14.y, r36.w, r47.x
+                                movc r40.z, r46.x, r14.y, r41.z
+                                ushr r36.zw, r43.xxxy, r43.zzzz
+                                or r14.y, r47.y, r36.z
+                                movc r47.x, r46.y, r14.y, r43.x
+                                movc r47.y, r46.z, r36.w, r43.y
+                                imin r47.w, r38.x, l(32)
+                                movc r42.xyz, r5.wwww, r40.xyzx, r41.xyzx
+                                mov r47.z, l(0)
+                                movc r44.xyzw, r5.wwww, r47.yxzw, r43.yxzw
+                                mov r37.xz, r44.zzwz
+                                mov r45.x, r44.y
+                              endif
+                              iadd r45.y, r36.x, r37.x
+                              iadd r40.y, r37.y, l(-8)
+                              ilt r5.w, r40.y, l(8)
+                              if_nz r5.w
+                                iadd r41.x, r42.x, r45.y
+                                ishr r5.w, r41.x, l(5)
+                                ishl r5.w, r5.w, l(2)
+                                iadd r5.w, r5.w, r35.z
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r43.xyzw, r5.w, t0.xyzw
+                                and r5.w, r41.x, l(31)
+                                ushr r36.xzw, r43.xxyz, r41.xxxx
+                                ult r14.y, l(0), r5.w
+                                iadd r5.w, -r5.w, l(32)
+                                ishl r37.xyw, r43.yzyw, r5.wwww
+                                and r37.xyw, r14.yyyy, r37.xyxw
+                                ilt r38.xw, l(32, 0, 0, 64), r38.yyyy
+                                or r36.xzw, r36.xxzw, r37.xxyw
+                                movc r41.z, r38.x, r36.z, r42.z
+                                movc r40.w, r38.w, r36.w, r45.x
+                                imin r40.yz, r38.yyyy, l(0, 97, 32, 0)
+                                mov r41.y, r36.x
+                                mov r40.x, l(0)
+                              else
+                                iadd r45.z, r37.z, l(-8)
+                                ilt r5.w, r45.z, l(8)
+                                iadd r37.x, r42.x, r45.y
+                                and r14.y, r45.y, l(31)
+                                ushr r36.xz, r42.yyzy, r45.yyyy
+                                ult r15.x, l(0), r14.y
+                                iadd r14.y, -r14.y, l(32)
+                                ishl r19.w, r42.z, r14.y
+                                and r19.w, r15.x, r19.w
+                                or r37.y, r19.w, r36.x
+                                ilt r36.xw, l(32, 0, 0, 64), r40.yyyy
+                                ishl r19.w, r45.x, r14.y
+                                and r19.w, r15.x, r19.w
+                                or r19.w, r19.w, r36.z
+                                movc r37.z, r36.x, r19.w, r42.z
+                                ushr r19.w, r45.x, r45.y
+                                ishl r14.y, r44.x, r14.y
+                                and r14.y, r14.y, r15.x
+                                or r14.y, r14.y, r19.w
+                                movc r43.x, r36.w, r14.y, r45.x
+                                imin r43.z, r38.y, l(32)
+                                movc r41.xyz, r5.wwww, r37.xyzx, r42.xyzx
+                                mov r43.y, l(0)
+                                movc r40.xzw, r5.wwww, r43.yyzx, r45.yyzx
+                              endif
+                              iadd r36.x, r36.y, r40.x
+                              iadd r37.y, r40.y, l(-8)
+                              ilt r5.w, r37.y, l(8)
+                              if_nz r5.w
+                                iadd r5.w, r36.x, r41.x
+                                ishr r14.y, r5.w, l(5)
+                                ishl r14.y, r14.y, l(2)
+                                iadd r14.y, r14.y, r35.z
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r38.xyw, r14.y, t0.xyxz
+                                and r14.y, r5.w, l(31)
+                                ushr r36.yw, r38.xxxy, r5.wwww
+                                ult r15.x, l(0), r14.y
+                                iadd r14.y, -r14.y, l(32)
+                                ishl r38.xy, r38.ywyy, r14.yyyy
+                                and r38.xy, r15.xxxx, r38.xyxx
+                                ilt r14.y, l(32), r38.z
+                                or r38.xy, r36.ywyy, r38.xyxx
+                                movc r38.w, r14.y, r38.y, r41.z
+                                imin r37.yz, r38.zzzz, l(0, 97, 32, 0)
+                                mov r37.x, l(0)
+                              else
+                                iadd r36.z, r40.z, l(-8)
+                                ilt r14.y, r36.z, l(8)
+                                iadd r40.x, r36.x, r41.x
+                                and r15.x, r36.x, l(31)
+                                ushr r36.yw, r41.yyyz, r36.xxxx
+                                ult r19.w, l(0), r15.x
+                                iadd r15.x, -r15.x, l(32)
+                                ishl r20.w, r41.z, r15.x
+                                and r20.w, r19.w, r20.w
+                                or r40.y, r20.w, r36.y
+                                ilt r20.w, l(32), r37.y
+                                ishl r15.x, r40.w, r15.x
+                                and r15.x, r15.x, r19.w
+                                or r15.x, r15.x, r36.w
+                                movc r40.z, r20.w, r15.x, r41.z
+                                imin r42.z, r38.z, l(32)
+                                movc r38.xyw, r14.yyyy, r40.yxyz, r41.yxyz
+                                mov r42.x, l(0)
+                                movc r37.xz, r14.yyyy, r42.xxzx, r36.xxzx
+                                mov r5.w, r38.y
+                              endif
+                              iadd r38.y, r13.w, r37.x
+                              iadd r13.w, r37.y, l(-8)
+                              ilt r13.w, r13.w, l(15)
+                              if_nz r13.w
+                                iadd r5.w, r5.w, r38.y
+                                ishr r13.w, r5.w, l(5)
+                                ishl r13.w, r13.w, l(2)
+                                iadd r13.w, r13.w, r35.z
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r35.zw, r13.w, t0.xxxy
+                                and r13.w, r5.w, l(31)
+                                ushr r5.w, r35.z, r5.w
+                                ult r14.y, l(0), r13.w
+                                iadd r13.w, -r13.w, l(32)
+                                ishl r13.w, r35.w, r13.w
+                                and r13.w, r13.w, r14.y
+                                or r38.x, r5.w, r13.w
+                                mov r38.y, l(0)
+                              else
+                                iadd r5.w, r37.z, l(-8)
+                                ilt r5.w, r5.w, l(15)
+                                if_nz r5.w
+                                  and r5.w, r38.y, l(31)
+                                  ushr r13.w, r38.x, r38.y
+                                  ult r14.y, l(0), r5.w
+                                  iadd r5.w, -r5.w, l(32)
+                                  ishl r5.w, r38.w, r5.w
+                                  and r5.w, r5.w, r14.y
+                                  or r38.x, r5.w, r13.w
+                                  mov r38.y, l(0)
+                                endif
+                              endif
+                              if_nz r14.x
+                                ubfe r5.w, r17.w, r38.y, r38.x
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r13.w, r35.y, t0.xxxx
+                                iadd r35.yzw, r35.yyyy, l(0, 8, 16, 24)
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r14.y, r35.y, t0.xxxx
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r15.x, r35.z, t0.xxxx
+                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r17.w, r35.w, t0.xxxx
+                                ult r14.y, r14.y, r5.w
+                                and r14.y, r15.x, r14.y
+                                iadd r5.w, r5.w, r14.y
+                                ishl r14.y, r17.w, l(23)
+                                iadd r14.y, -r14.y, l(0x3f800000)
+                                iadd r5.w, r13.w, r5.w
+                                itof r5.w, r5.w
+                                mul r5.w, r14.y, r5.w
+                                mov x4[3].x, r5.w
+                              endif
+                              mov r5.w, x4[3].x
+                              mad r28.xyz, r28.xywx, r10.yyyy, -r39.zxyz
+                              mad r19.xyz, r19.xyzx, r10.yyyy, -r39.yzxy
+                              add r2.w, -r12.y, r2.w
+                              add r5.w, -r12.y, r5.w
+                              add r10.y, |r2.w|, |r5.w|
+                              lt r10.y, l(0.000001), r10.y
+                              mul r35.yzw, r19.xxyz, r25.zzxy
+                              mad r19.xyz, r25.yzxy, r19.yzxy, -r35.yzwy
+                              mul r35.yzw, r25.yyzx, r28.xxyz
+                              mad r28.xyz, r28.zxyz, r25.zxyz, -r35.yzwy
+                              mul r28.xyz, r5.wwww, r28.xyzx
+                              mad r19.xyz, r19.xyzx, r2.wwww, r28.xyzx
+                              dp3 r2.w, r19.xyzx, r19.xyzx
+                              rsq r2.w, r2.w
+                              mul r19.xyz, r2.wwww, r19.xyzx
+                              ge r2.w, r25.z, l(0.000000)
+                              movc r28.xy, r2.wwww, l(1.000000,-1.000000,0,0), l(-1.000000,1.000000,0,0)
+                              add r2.w, r25.z, r28.x
+                              rcp r2.w, r2.w
+                              mul r28.zw, r25.yyyx, r25.xxxx
+                              mul r5.w, -r2.w, r28.z
+                              mul r2.w, -r2.w, r28.x
+                              mad r36.x, r2.w, r28.w, l(1.000000)
+                              mul r36.y, r5.w, r28.x
+                              mul r36.z, r25.x, r28.y
+                              movc r19.xyz, r10.yyyy, r19.xyzx, r36.xyzx
+                              mad r19.xyz, r19.xyzx, l(0.500000, 0.500000, 0.500000, 0.000000), l(0.500000, 0.500000, 0.500000, 0.000000)
+                              movc o5.xyz, r15.wwww, r3.xyzx, r19.xyzx
+                              mov o5.w, l(1.000000)
+                            else
+                              ieq r2.w, cb0[0].x, l(16)
+                              if_nz r2.w
+                                if_nz r15.w
+                                  mul r3.xyz, r24.ywxy, r25.zxyz
+                                  mad r3.xyz, r25.yzxy, r24.wxyw, -r3.xyzx
+                                  mul r3.xyz, r11.zzzz, r3.xyzx
+                                  dp3 r2.w, r3.xyzx, r3.xyzx
+                                  rsq r2.w, r2.w
+                                  mul r3.xyz, r2.wwww, r3.xyzx
+                                  mad r3.xyz, r3.xyzx, l(0.500000, 0.500000, 0.500000, 0.000000), l(0.500000, 0.500000, 0.500000, 0.000000)
+                                else
+                                  udiv null, r2.w, r8.w, l(3)
+                                  iadd r2.w, -r2.w, r8.w
+                                  iadd r15.xw, r8.wwww, l(2, 0, 0, 1)
+                                  udiv null, r15.xw, r15.xxxw, l(3, 0, 0, 3)
+                                  iadd r15.xw, r2.wwww, r15.xxxw
+                                  ineg r19.xy, r15.xwxx
+                                  ult r24.xyzw, r15.xxww, l(1, 2, 1, 2)
+                                  and r19.xy, r19.xyxx, r24.ywyy
+                                  iadd r15.xw, r15.xxxw, l(-3, 0, 0, -3)
+                                  movc r28.xy, r24.ywyy, l(0,0,0,0), r15.xwxx
+                                  mov r19.z, r24.x
+                                  mov r19.w, r28.x
+                                  and r36.xyz, r19.zxwz, r20.xyzx
+                                  mov r36.w, l(0)
+                                  or r15.xw, r36.yyyw, r36.xxxz
+                                  or r2.w, r15.w, r15.x
+                                  iadd r5.w, r16.w, r16.z
+                                  iadd r5.w, r15.z, r5.w
+                                  imul null, r8.w, r2.w, r5.w
+                                  iadd r10.y, r9.y, r11.w
+                                  ushr r11.z, r8.w, l(5)
+                                  ishl r11.z, r11.z, l(2)
+                                  iadd r11.z, r10.y, r11.z
+                                  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r15.xzw, r11.z, t0.xxyz
+                                  and r11.z, r8.w, l(31)
+                                  ushr r19.xz, r15.xxzx, r8.wwww
+                                  ult r8.w, l(0), r11.z
+                                  iadd r11.z, -r11.z, l(32)
+                                  ishl r11.zw, r15.zzzw, r11.zzzz
+                                  and r11.zw, r8.wwww, r11.zzzw
+                                  or r11.zw, r11.zzzw, r19.xxxz
+                                  ubfe r36.y, r17.x, l(0), r11.z
+                                  ushr r15.xz, r11.zzwz, r17.xxxx
+                                  ult r19.xz, l(0, 0, 0, 0), r16.zzwz
+                                  iadd r16.zw, -r16.zzzw, l(0, 0, 32, 32)
+                                  ishl r8.w, r11.w, r16.z
+                                  and r8.w, r8.w, r19.x
+                                  or r8.w, r8.w, r15.x
+                                  ubfe r36.z, r17.y, l(0), r8.w
+                                  ushr r8.w, r8.w, r17.y
+                                  ishl r11.z, r15.z, r16.w
+                                  and r11.z, r11.z, r19.z
+                                  or r8.w, r8.w, r11.z
+                                  ubfe r36.x, r17.z, l(0), r8.w
+                                  ishl r8.w, r12.x, l(23)
+                                  iadd r8.w, -r8.w, l(0x3f800000)
+                                  iadd r15.xzw, r13.zzxy, r36.xxyz
+                                  itof r15.xzw, r15.xxzw
+                                  mov r28.z, r24.z
+                                  mov r28.w, r19.y
+                                  and r20.xyz, r20.xyzx, r28.zwyz
+                                  mov r20.w, l(0)
+                                  or r11.zw, r20.yyyw, r20.xxxz
+                                  or r11.z, r11.w, r11.z
+                                  imul null, r5.w, r5.w, r11.z
+                                  ushr r11.w, r5.w, l(5)
+                                  ishl r11.w, r11.w, l(2)
+                                  iadd r10.y, r10.y, r11.w
+                                  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r20.xyz, r10.y, t0.xyzx
+                                  and r10.y, r5.w, l(31)
+                                  ushr r19.yw, r20.xxxy, r5.wwww
+                                  ult r5.w, l(0), r10.y
+                                  iadd r10.y, -r10.y, l(32)
+                                  ishl r20.xy, r20.yzyy, r10.yyyy
+                                  and r20.xy, r5.wwww, r20.xyxx
+                                  or r19.yw, r19.yyyw, r20.xxxy
+                                  ubfe r20.z, r17.x, l(0), r19.y
+                                  ushr r17.xw, r19.yyyw, r17.xxxx
+                                  ishl r5.w, r19.w, r16.z
+                                  and r5.w, r5.w, r19.x
+                                  or r5.w, r5.w, r17.x
+                                  ubfe r20.x, r17.y, l(0), r5.w
+                                  ushr r5.w, r5.w, r17.y
+                                  ishl r10.y, r17.w, r16.w
+                                  and r10.y, r10.y, r19.z
+                                  or r5.w, r5.w, r10.y
+                                  ubfe r20.y, r17.z, l(0), r5.w
+                                  iadd r13.xyz, r13.yzxy, r20.xyzx
+                                  itof r13.xyz, r13.xyzx
+                                  iadd r16.zw, r9.yyyy, r18.xxxy
+                                  mov x6[3].xy, l(0,0,0,0)
+                                  and r5.w, r12.w, l(15)
+                                  ubfe r17.xy, l(4, 4, 0, 0), l(4, 8, 0, 0), r15.yyyy
+                                  ubfe r9.y, l(4), l(12), r12.w
+                                  imul null, r2.w, r16.y, r2.w
+                                  ishr r10.y, r2.w, l(5)
+                                  ishl r10.y, r10.y, l(2)
+                                  iadd r10.y, r10.y, r16.w
+                                  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r19.xyzw, r10.y, t0.xyzw
+                                  and r10.y, r2.w, l(31)
+                                  ushr r20.xyz, r19.xyzx, r2.wwww
+                                  ult r2.w, l(0), r10.y
+                                  iadd r10.y, -r10.y, l(32)
+                                  ishl r19.xyz, r19.yzwy, r10.yyyy
+                                  and r19.xyz, r2.wwww, r19.xyzx
+                                  or r19.xyz, r19.xyzx, r20.xyzx
+                                  iadd r2.w, r5.w, l(18)
+                                  and r5.w, r2.w, l(31)
+                                  ushr r10.y, r19.x, r2.w
+                                  ult r11.w, l(0), r5.w
+                                  iadd r5.w, -r5.w, l(32)
+                                  ishl r12.xw, r19.yyyz, r5.wwww
+                                  and r12.xw, r11.wwww, r12.xxxw
+                                  or r10.y, r10.y, r12.x
+                                  ushr r12.x, r19.y, r2.w
+                                  or r12.x, r12.w, r12.x
+                                  iadd r12.w, r17.y, r17.x
+                                  iadd r12.w, r9.y, r12.w
+                                  and r19.x, r14.z, l(15)
+                                  ubfe r13.w, l(4), l(4), r14.z
+                                  and r14.y, r12.w, l(31)
+                                  ushr r10.y, r10.y, r12.w
+                                  ult r12.w, l(0), r14.y
+                                  iadd r14.y, -r14.y, l(32)
+                                  ishl r12.x, r12.x, r14.y
+                                  and r12.x, r12.x, r12.w
+                                  or r19.y, r10.y, r12.x
+                                  mov r12.xw, r19.yyyx
+                                  if_nz r14.x
+                                    ubfe r18.x, r19.x, l(0), r19.y
+                                    ubfe r18.y, r13.w, r12.w, r12.x
+                                    ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r20.xyzw, r16.z, t0.xyzw
+                                    iadd r10.y, r16.z, l(16)
+                                    ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r24.xyz, r10.y, t0.xyzx
+                                    ult r12.xw, r20.zzzw, r18.xxxy
+                                    and r12.xw, r24.xxxy, r12.xxxw
+                                    iadd r12.xw, r12.xxxw, r18.xxxy
+                                    ishl r10.y, r24.z, l(23)
+                                    iadd r10.y, -r10.y, l(0x3f800000)
+                                    iadd r12.xw, r20.xxxy, r12.xxxw
+                                    itof r12.xw, r12.xxxw
+                                    mul r12.xw, r10.yyyy, r12.xxxw
+                                    mov x6[3].xy, r12.xwxx
+                                  endif
+                                  mov r12.xw, x6[3].xxxy
+                                  mov x7[3].xy, l(0,0,0,0)
+                                  imul null, r10.y, r16.y, r11.z
+                                  ishr r11.z, r10.y, l(5)
+                                  ishl r11.z, r11.z, l(2)
+                                  iadd r11.z, r11.z, r16.w
+                                  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r20.xyzw, r11.z, t0.xyzw
+                                  and r11.z, r10.y, l(31)
+                                  ushr r24.xyz, r20.xyzx, r10.yyyy
+                                  ult r10.y, l(0), r11.z
+                                  iadd r11.z, -r11.z, l(32)
+                                  ishl r20.xyz, r20.yzwy, r11.zzzz
+                                  and r20.xyz, r10.yyyy, r20.xyzx
+                                  or r20.xyz, r20.xyzx, r24.xyzx
+                                  ushr r10.y, r20.x, r2.w
+                                  ishl r11.z, r20.y, r5.w
+                                  and r11.z, r11.z, r11.w
+                                  or r10.y, r10.y, r11.z
+                                  ushr r2.w, r20.y, r2.w
+                                  ishl r5.w, r20.z, r5.w
+                                  and r5.w, r5.w, r11.w
+                                  or r2.w, r2.w, r5.w
+                                  iadd r5.w, r17.y, r17.x
+                                  iadd r5.w, r9.y, r5.w
+                                  and r9.y, r5.w, l(31)
+                                  ushr r5.w, r10.y, r5.w
+                                  ult r10.y, l(0), r9.y
+                                  iadd r9.y, -r9.y, l(32)
+                                  ishl r2.w, r2.w, r9.y
+                                  and r2.w, r2.w, r10.y
+                                  or r19.z, r2.w, r5.w
+                                  mov r11.zw, r19.zzzx
+                                  if_nz r14.x
+                                    ubfe r14.x, r19.x, l(0), r19.z
+                                    ubfe r14.y, r13.w, r11.w, r11.z
+                                    ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r17.xyzw, r16.z, t0.xyzw
+                                    iadd r2.w, r16.z, l(16)
+                                    ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r16.yzw, r2.w, t0.xxyz
+                                    ult r11.zw, r17.zzzw, r14.xxxy
+                                    and r11.zw, r16.yyyz, r11.zzzw
+                                    iadd r11.zw, r11.zzzw, r14.xxxy
+                                    ishl r2.w, r16.w, l(23)
+                                    iadd r2.w, -r2.w, l(0x3f800000)
+                                    iadd r11.zw, r17.xxxy, r11.zzzw
+                                    itof r11.zw, r11.zzzw
+                                    mul r11.zw, r2.wwww, r11.zzzw
+                                    mov x7[3].xy, r11.zwzz
+                                  endif
+                                  mov r11.zw, x7[3].xxxy
+                                  mad r14.xyz, r15.xzwx, r8.wwww, -r39.zxyz
+                                  mad r13.xyz, r13.xyzx, r8.wwww, -r39.yzxy
+                                  add r12.xw, -r12.yyyz, r12.xxxw
+                                  add r11.zw, -r12.yyyz, r11.zzzw
+                                  add r2.w, |r11.z|, |r12.x|
+                                  lt r2.w, l(0.000001), r2.w
+                                  mul r15.xyz, r13.xyzx, r25.zxyz
+                                  mad r13.xyz, r25.yzxy, r13.yzxy, -r15.xyzx
+                                  mul r15.xyz, r25.yzxy, r14.xyzx
+                                  mad r14.xyz, r14.zxyz, r25.zxyz, -r15.xyzx
+                                  mul r15.xyz, r11.zzzz, r14.xyzx
+                                  mad r15.xyz, r13.xyzx, r12.xxxx, r15.xyzx
+                                  mul r14.xyz, r11.wwww, r14.xyzx
+                                  mad r13.xyz, r13.xyzx, r12.wwww, r14.xyzx
+                                  dp3 r5.w, r15.xyzx, r15.xyzx
+                                  rsq r5.w, r5.w
+                                  mul r15.yzw, r5.wwww, r15.xxyz
+                                  mul r14.xyz, r15.zwyz, r25.zxyz
+                                  mad r14.xyz, r25.yzxy, r15.wyzw, -r14.xyzx
+                                  dp3 r5.w, r13.xyzx, r14.xyzx
+                                  lt r5.w, r5.w, l(0.000000)
+                                  movc r15.x, r5.w, l(-1), l(1)
+                                  ge r5.w, r25.z, l(0.000000)
+                                  movc r11.zw, r5.wwww, l(0,0,1.000000,-1.000000), l(0,0,-1.000000,1.000000)
+                                  add r5.w, r25.z, r11.z
+                                  rcp r5.w, r5.w
+                                  mul r12.xw, r25.yyyx, r25.xxxx
+                                  mul r8.w, -r5.w, r12.x
+                                  mul r5.w, -r5.w, r11.z
+                                  mad r13.y, r5.w, r12.w, l(1.000000)
+                                  mul r13.z, r8.w, r11.z
+                                  mul r13.w, r25.x, r11.w
+                                  mov r13.x, l(1)
+                                  movc r13.xyzw, r2.wwww, r15.xyzw, r13.xyzw
+                                  itof r2.w, r13.x
+                                  mul r14.xyz, r13.zwyz, r25.zxyz
+                                  mad r13.xyz, r25.yzxy, r13.wyzw, -r14.xyzx
+                                  mul r13.xyz, r2.wwww, r13.xyzx
+                                  dp3 r2.w, r13.xyzx, r13.xyzx
+                                  rsq r2.w, r2.w
+                                  mul r13.xyz, r2.wwww, r13.xyzx
+                                  mad r3.xyz, r13.xyzx, l(0.500000, 0.500000, 0.500000, 0.000000), l(0.500000, 0.500000, 0.500000, 0.000000)
+                                endif
+                                mov o5.xyz, r3.xyzx
+                                mov o5.w, l(1.000000)
+                              else
+                                ieq r2.w, cb0[0].x, l(17)
+                                if_nz r2.w
+                                  mov o5.xy, r12.yzyy
+                                  mov o5.zw, l(0,0,0,1.000000)
+                                else
+                                  ieq r2.w, cb0[0].x, l(18)
+                                  if_nz r2.w
+                                    mov o5.xy, r18.zwzz
+                                    mov o5.zw, l(0,0,0,1.000000)
+                                  else
+                                    ieq r2.w, cb0[0].x, l(19)
+                                    if_nz r2.w
+                                      mov o5.xy, r22.zwzz
+                                      mov o5.zw, l(0,0,0,1.000000)
+                                    else
+                                      ieq r2.w, cb0[0].x, l(20)
+                                      if_nz r2.w
+                                        mov o5.xy, r26.xyxx
+                                        mov o5.zw, l(0,0,0,1.000000)
+                                      else
+                                        ieq r2.w, cb0[0].x, l(21)
+                                        if_nz r2.w
+                                          if_nz r22.y
+                                            ishr r2.w, r14.w, l(5)
+                                            ishl r2.w, r2.w, l(2)
+                                            iadd r2.w, r2.w, r10.w
+                                            ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r3.xy, r2.w, t0.xyxx
+                                            and r2.w, r14.w, l(31)
+                                            ushr r3.x, r3.x, r14.w
+                                            ult r3.z, l(0), r2.w
+                                            iadd r2.w, -r2.w, l(32)
+                                            ishl r2.w, r3.y, r2.w
+                                            and r2.w, r2.w, r3.z
+                                            or r2.w, r2.w, r3.x
+                                            ubfe r2.w, r21.z, l(0), r2.w
+                                            iadd r33.x, r33.x, r2.w
+                                          endif
+                                          iadd r2.w, r33.x, l(1)
+                                          xor r2.w, r2.w, l(0)
+                                          imul null, r2.w, r2.w, l(0x85ebca6b)
+                                          ushr r3.x, r2.w, l(13)
+                                          xor r2.w, r2.w, r3.x
+                                          imul null, r2.w, r2.w, l(0xc2b2ae35)
+                                          ushr r3.x, r2.w, l(16)
+                                          xor r2.w, r2.w, r3.x
+                                          and r3.x, r2.w, l(255)
+                                          ubfe r3.yz, l(0, 8, 8, 0), l(0, 8, 16, 0), r2.wwww
+                                          utof r12.xyz, r3.xyzx
+                                          mul o5.xyz, r12.xyzx, l(0.00392156886, 0.00392156886, 0.00392156886, 0.000000)
+                                          mov o5.w, l(0.00392156886)
+                                        else
+                                          ieq r2.w, cb0[0].x, l(22)
+                                          if_nz r2.w
+                                            if_nz r22.y
+                                              ishr r2.w, r14.w, l(5)
+                                              ishl r2.w, r2.w, l(2)
+                                              iadd r2.w, r2.w, r10.w
+                                              ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r3.xy, r2.w, t0.xyxx
+                                              and r2.w, r14.w, l(31)
+                                              ushr r3.x, r3.x, r14.w
+                                              ult r3.z, l(0), r2.w
+                                              iadd r2.w, -r2.w, l(32)
+                                              ishl r2.w, r3.y, r2.w
+                                              and r2.w, r2.w, r3.z
+                                              or r2.w, r2.w, r3.x
+                                              ubfe r2.w, r34.x, r21.z, r2.w
+                                              iadd r33.y, r33.y, r2.w
+                                            endif
+                                            iadd r2.w, r33.y, l(1)
+                                            xor r2.w, r2.w, l(0)
+                                            imul null, r2.w, r2.w, l(0x85ebca6b)
+                                            ushr r3.x, r2.w, l(13)
+                                            xor r2.w, r2.w, r3.x
+                                            imul null, r2.w, r2.w, l(0xc2b2ae35)
+                                            ushr r3.x, r2.w, l(16)
+                                            xor r2.w, r2.w, r3.x
+                                            and r3.x, r2.w, l(255)
+                                            ubfe r3.yz, l(0, 8, 8, 0), l(0, 8, 16, 0), r2.wwww
+                                            utof r12.xyz, r3.xyzx
+                                            mul o5.xyz, r12.xyzx, l(0.00392156886, 0.00392156886, 0.00392156886, 0.000000)
+                                            mov o5.w, l(0.00392156886)
+                                          else
+                                            ieq r2.w, cb0[0].x, l(23)
+                                            if_nz r2.w
+                                              if_nz r22.y
+                                                ishr r2.w, r14.w, l(5)
+                                                ishl r2.w, r2.w, l(2)
+                                                iadd r2.w, r2.w, r10.w
+                                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r3.xyz, r2.w, t0.xyzx
+                                                and r2.w, r14.w, l(31)
+                                                ushr r11.zw, r3.xxxy, r14.wwww
+                                                ult r3.x, l(0), r2.w
+                                                iadd r2.w, -r2.w, l(32)
+                                                ishl r3.yz, r3.yyzy, r2.wwww
+                                                and r3.xy, r3.yzyy, r3.xxxx
+                                                or r3.xy, r3.xyxx, r11.zwzz
+                                                ushr r2.w, r3.x, r35.x
+                                                ult r3.x, l(0), r35.x
+                                                iadd r3.z, -r35.x, l(32)
+                                                ishl r3.y, r3.y, r3.z
+                                                and r3.x, r3.y, r3.x
+                                                or r2.w, r2.w, r3.x
+                                                ubfe r2.w, r34.y, l(0), r2.w
+                                                iadd r33.z, r33.z, r2.w
+                                              endif
+                                              iadd r2.w, r33.z, l(1)
+                                              xor r2.w, r2.w, l(0)
+                                              imul null, r2.w, r2.w, l(0x85ebca6b)
+                                              ushr r3.x, r2.w, l(13)
+                                              xor r2.w, r2.w, r3.x
+                                              imul null, r2.w, r2.w, l(0xc2b2ae35)
+                                              ushr r3.x, r2.w, l(16)
+                                              xor r2.w, r2.w, r3.x
+                                              and r3.x, r2.w, l(255)
+                                              ubfe r3.yz, l(0, 8, 8, 0), l(0, 8, 16, 0), r2.wwww
+                                              utof r12.xyz, r3.xyzx
+                                              mul o5.xyz, r12.xyzx, l(0.00392156886, 0.00392156886, 0.00392156886, 0.000000)
+                                              mov o5.w, l(0.00392156886)
+                                            else
+                                              ieq r2.w, cb0[0].x, l(24)
+                                              if_nz r2.w
+                                                if_nz r22.y
+                                                  ishr r2.w, r14.w, l(5)
+                                                  ishl r2.w, r2.w, l(2)
+                                                  iadd r2.w, r2.w, r10.w
+                                                  ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r3.xyz, r2.w, t0.xyzx
+                                                  and r2.w, r14.w, l(31)
+                                                  ushr r11.zw, r3.xxxy, r14.wwww
+                                                  ult r3.x, l(0), r2.w
+                                                  iadd r2.w, -r2.w, l(32)
+                                                  ishl r3.yz, r3.yyzy, r2.wwww
+                                                  and r3.xy, r3.yzyy, r3.xxxx
+                                                  or r3.xy, r3.xyxx, r11.zwzz
+                                                  ushr r2.w, r3.x, r35.x
+                                                  ult r3.x, l(0), r35.x
+                                                  iadd r3.z, -r35.x, l(32)
+                                                  ishl r3.y, r3.y, r3.z
+                                                  and r3.x, r3.y, r3.x
+                                                  or r2.w, r2.w, r3.x
+                                                  ubfe r2.w, r26.z, r34.y, r2.w
+                                                  iadd r33.w, r33.w, r2.w
+                                                endif
+                                                iadd r2.w, r33.w, l(1)
+                                                xor r2.w, r2.w, l(0)
+                                                imul null, r2.w, r2.w, l(0x85ebca6b)
+                                                ushr r3.x, r2.w, l(13)
+                                                xor r2.w, r2.w, r3.x
+                                                imul null, r2.w, r2.w, l(0xc2b2ae35)
+                                                ushr r3.x, r2.w, l(16)
+                                                xor r2.w, r2.w, r3.x
+                                                and r3.x, r2.w, l(255)
+                                                ubfe r3.yz, l(0, 8, 8, 0), l(0, 8, 16, 0), r2.wwww
+                                                utof r12.xyz, r3.xyzx
+                                                mul o5.xyz, r12.xyzx, l(0.00392156886, 0.00392156886, 0.00392156886, 0.000000)
+                                                mov o5.w, l(0.00392156886)
+                                              else
+                                                ieq r2.w, cb0[0].x, l(25)
+                                                if_nz r2.w
+                                                  if_nz r22.y
+                                                    ishr r2.w, r14.w, l(5)
+                                                    ishl r2.w, r2.w, l(2)
+                                                    iadd r2.w, r2.w, r10.w
+                                                    ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r12.xyzw, r2.w, t0.xyzw
+                                                    and r2.w, r14.w, l(31)
+                                                    ushr r3.xyz, r12.xyzx, r14.wwww
+                                                    ult r5.w, l(0), r2.w
+                                                    iadd r2.w, -r2.w, l(32)
+                                                    ishl r12.xyz, r12.yzwy, r2.wwww
+                                                    and r12.xyz, r5.wwww, r12.xyzx
+                                                    or r3.xyz, r3.xyzx, r12.xyzx
+                                                    imad r14.w, r10.x, r11.x, r35.x
+                                                    ushr r11.zw, r3.xxxy, r35.xxxx
+                                                    ult r2.w, l(0), r35.x
+                                                    iadd r3.x, -r35.x, l(32)
+                                                    ishl r3.xy, r3.yzyy, r3.xxxx
+                                                    and r3.xy, r2.wwww, r3.xyxx
+                                                    or r3.xy, r3.xyxx, r11.zwzz
+                                                    iadd r2.w, r26.z, r34.y
+                                                    mov r3.z, l(41)
+                                                  else
+                                                    mov r2.w, l(0)
+                                                    mov r3.xyz, l(0,0,0,0)
+                                                  endif
+                                                  if_nz r22.x
+                                                    ilt r3.z, r3.z, l(14)
+                                                    if_nz r3.z
+                                                      iadd r3.z, r2.w, r14.w
+                                                      ishr r5.w, r3.z, l(5)
+                                                      ishl r5.w, r5.w, l(2)
+                                                      iadd r5.w, r5.w, r10.w
+                                                      ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r11.zw, r5.w, t0.xxxy
+                                                      and r5.w, r3.z, l(31)
+                                                      ushr r3.z, r11.z, r3.z
+                                                      ult r8.w, l(0), r5.w
+                                                      iadd r5.w, -r5.w, l(32)
+                                                      ishl r5.w, r11.w, r5.w
+                                                      and r5.w, r5.w, r8.w
+                                                      or r3.z, r3.z, r5.w
+                                                    else
+                                                      ushr r3.x, r3.x, r2.w
+                                                      ult r5.w, l(0), r2.w
+                                                      iadd r2.w, -r2.w, l(32)
+                                                      ishl r2.w, r3.y, r2.w
+                                                      and r2.w, r2.w, r5.w
+                                                      or r3.z, r2.w, r3.x
+                                                    endif
+                                                    ubfe r2.w, r21.y, l(0), r3.z
+                                                    iadd r2.w, r32.x, r2.w
+                                                    utof r2.w, r2.w
+                                                    mul r2.w, r2.w, l(0.0000610388815)
+                                                  else
+                                                    utof r3.x, r32.x
+                                                    mul r2.w, r3.x, l(0.0000610388815)
+                                                  endif
+                                                  mad r3.xyz, r2.wwww, l(-52.889034, -21.545273, 110.517464, 0.000000), l(218.763718, 67.521507, -305.204590, 0.000000)
+                                                  mad r3.xyz, r2.wwww, r3.xyzx, l(-334.835144, -69.317497, 288.585876, 0.000000)
+                                                  mad r3.xyz, r2.wwww, r3.xyzx, l(228.766083, 25.049868, -91.541054, 0.000000)
+                                                  mad r3.xyz, r2.wwww, r3.xyzx, l(-66.094025, -4.927983, -10.094394, 0.000000)
+                                                  mad r3.xyz, r2.wwww, r3.xyzx, l(6.71641970, 3.18228674, 7.57158136, 0.000000)
+                                                  mad o5.xyz, r2.wwww, r3.xyzx, l(0.114089012, 0.0628834069, 0.224833727, 0.000000)
+                                                  mov o5.w, l(1.000000)
+                                                else
+                                                  ieq r2.w, cb0[0].x, l(26)
+                                                  if_nz r2.w
+                                                    if_nz r22.y
+                                                      ishr r2.w, r14.w, l(5)
+                                                      ishl r2.w, r2.w, l(2)
+                                                      iadd r2.w, r2.w, r10.w
+                                                      ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r12.xyzw, r2.w, t0.xyzw
+                                                      and r2.w, r14.w, l(31)
+                                                      ushr r3.xyz, r12.xyzx, r14.wwww
+                                                      ult r5.w, l(0), r2.w
+                                                      iadd r2.w, -r2.w, l(32)
+                                                      ishl r12.xyz, r12.yzwy, r2.wwww
+                                                      and r12.xyz, r5.wwww, r12.xyzx
+                                                      or r3.xyz, r3.xyzx, r12.xyzx
+                                                      imad r14.w, r10.x, r11.x, r35.x
+                                                      ushr r11.zw, r3.xxxy, r35.xxxx
+                                                      ult r2.w, l(0), r35.x
+                                                      iadd r3.x, -r35.x, l(32)
+                                                      ishl r3.xy, r3.yzyy, r3.xxxx
+                                                      and r3.xy, r2.wwww, r3.xyxx
+                                                      or r3.xy, r3.xyxx, r11.zwzz
+                                                      iadd r2.w, r26.z, r34.y
+                                                      mov r3.z, l(41)
+                                                      mov r5.w, l(56)
+                                                    else
+                                                      mov r2.w, l(0)
+                                                      mov r3.xyz, l(0,0,0,0)
+                                                      mov r5.w, l(112)
+                                                    endif
+                                                    if_nz r22.x
+                                                      ilt r8.w, r3.z, l(14)
+                                                      if_nz r8.w
+                                                        iadd r8.w, r2.w, r14.w
+                                                        ishr r9.y, r8.w, l(5)
+                                                        ishl r9.y, r9.y, l(2)
+                                                        iadd r9.y, r9.y, r10.w
+                                                        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r11.zw, r9.y, t0.xxxy
+                                                        and r9.y, r8.w, l(31)
+                                                        ushr r10.y, r11.z, r8.w
+                                                        ult r11.z, l(0), r9.y
+                                                        iadd r9.y, -r9.y, l(32)
+                                                        ishl r9.y, r11.w, r9.y
+                                                        and r9.y, r9.y, r11.z
+                                                        or r21.x, r9.y, r10.y
+                                                        imin r3.z, r5.w, l(97)
+                                                      else
+                                                        iadd r8.w, r2.w, r14.w
+                                                        ushr r3.x, r3.x, r2.w
+                                                        ult r5.w, l(0), r2.w
+                                                        iadd r2.w, -r2.w, l(32)
+                                                        ishl r2.w, r3.y, r2.w
+                                                        and r2.w, r2.w, r5.w
+                                                        or r21.x, r2.w, r3.x
+                                                      endif
+                                                      iadd r2.w, r3.z, l(-14)
+                                                      ilt r2.w, r2.w, l(14)
+                                                      if_nz r2.w
+                                                        iadd r2.w, r21.y, r8.w
+                                                        ishr r3.x, r2.w, l(5)
+                                                        ishl r3.x, r3.x, l(2)
+                                                        iadd r3.x, r3.x, r10.w
+                                                        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r3.xy, r3.x, t0.xyxx
+                                                        and r3.z, r2.w, l(31)
+                                                        ushr r2.w, r3.x, r2.w
+                                                        ult r3.x, l(0), r3.z
+                                                        iadd r3.z, -r3.z, l(32)
+                                                        ishl r3.y, r3.y, r3.z
+                                                        and r3.x, r3.y, r3.x
+                                                        or r21.x, r2.w, r3.x
+                                                        mov r21.y, l(0)
+                                                      endif
+                                                      ubfe r2.w, r34.z, r21.y, r21.x
+                                                      iadd r2.w, r32.y, r2.w
+                                                      utof r2.w, r2.w
+                                                      mul r2.w, r2.w, l(0.0000610388815)
+                                                    else
+                                                      utof r3.x, r32.y
+                                                      mul r2.w, r3.x, l(0.0000610388815)
+                                                    endif
+                                                    mad r3.xyz, r2.wwww, l(-52.889034, -21.545273, 110.517464, 0.000000), l(218.763718, 67.521507, -305.204590, 0.000000)
+                                                    mad r3.xyz, r2.wwww, r3.xyzx, l(-334.835144, -69.317497, 288.585876, 0.000000)
+                                                    mad r3.xyz, r2.wwww, r3.xyzx, l(228.766083, 25.049868, -91.541054, 0.000000)
+                                                    mad r3.xyz, r2.wwww, r3.xyzx, l(-66.094025, -4.927983, -10.094394, 0.000000)
+                                                    mad r3.xyz, r2.wwww, r3.xyzx, l(6.71641970, 3.18228674, 7.57158136, 0.000000)
+                                                    mad o5.xyz, r2.wwww, r3.xyzx, l(0.114089012, 0.0628834069, 0.224833727, 0.000000)
+                                                    mov o5.w, l(1.000000)
+                                                  else
+                                                    ieq r2.w, cb0[0].x, l(27)
+                                                    if_nz r2.w
+                                                      if_nz r22.y
+                                                        ishr r2.w, r14.w, l(5)
+                                                        ishl r2.w, r2.w, l(2)
+                                                        iadd r2.w, r2.w, r10.w
+                                                        ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r12.xyzw, r2.w, t0.xyzw
+                                                        and r2.w, r14.w, l(31)
+                                                        ushr r13.xyzw, r12.xyzw, r14.wwww
+                                                        ult r3.x, l(0), r2.w
+                                                        iadd r2.w, -r2.w, l(32)
+                                                        ishl r12.xyz, r12.yzwy, r2.wwww
+                                                        and r3.xyz, r3.xxxx, r12.xyzx
+                                                        or r3.xyz, r3.xyzx, r13.xyzx
+                                                        imad r14.w, r10.x, r11.x, r35.x
+                                                        ushr r12.xyz, r3.xyzx, r35.xxxx
+                                                        ult r2.w, l(0), r35.x
+                                                        iadd r3.x, -r35.x, l(32)
+                                                        ishl r3.yz, r3.yyzy, r3.xxxx
+                                                        and r3.yz, r2.wwww, r3.yyzy
+                                                        or r13.xy, r3.yzyy, r12.xyxx
+                                                        ishl r3.x, r13.w, r3.x
+                                                        and r2.w, r2.w, r3.x
+                                                        or r2.w, r2.w, r12.z
+                                                        iadd r13.z, r26.z, r34.y
+                                                        mov r3.xy, l(41,56,0,0)
+                                                      else
+                                                        mov r13.xyz, l(0,0,0,0)
+                                                        mov r2.w, l(0)
+                                                        mov r3.xy, l(0,112,0,0)
+                                                      endif
+                                                      if_nz r22.x
+                                                        ilt r3.z, r3.x, l(14)
+                                                        if_nz r3.z
+                                                          iadd r3.z, r13.z, r14.w
+                                                          ishr r5.w, r3.z, l(5)
+                                                          ishl r5.w, r5.w, l(2)
+                                                          iadd r5.w, r5.w, r10.w
+                                                          ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r12.xyz, r5.w, t0.xyzx
+                                                          and r5.w, r3.z, l(31)
+                                                          ushr r11.zw, r12.xxxy, r3.zzzz
+                                                          ult r8.w, l(0), r5.w
+                                                          iadd r5.w, -r5.w, l(32)
+                                                          ishl r12.xy, r12.yzyy, r5.wwww
+                                                          and r12.xy, r8.wwww, r12.xyxx
+                                                          or r11.zw, r11.wwwz, r12.yyyx
+                                                          imin r3.x, r3.y, l(97)
+                                                          mov r12.x, r11.w
+                                                        else
+                                                          iadd r3.z, r13.z, r14.w
+                                                          ushr r12.zw, r13.xxxy, r13.zzzz
+                                                          ult r5.w, l(0), r13.z
+                                                          iadd r8.w, -r13.z, l(32)
+                                                          ishl r9.y, r13.y, r8.w
+                                                          and r9.y, r5.w, r9.y
+                                                          or r12.x, r9.y, r12.z
+                                                          ilt r9.y, l(32), r3.x
+                                                          ishl r2.w, r2.w, r8.w
+                                                          and r2.w, r2.w, r5.w
+                                                          or r2.w, r2.w, r12.w
+                                                          movc r11.z, r9.y, r2.w, r13.y
+                                                        endif
+                                                        iadd r21.x, r3.x, l(-14)
+                                                        ilt r2.w, r21.x, l(14)
+                                                        if_nz r2.w
+                                                          iadd r2.w, r3.y, l(-14)
+                                                          iadd r3.z, r21.y, r3.z
+                                                          ishr r3.x, r3.z, l(5)
+                                                          ishl r3.x, r3.x, l(2)
+                                                          iadd r3.x, r3.x, r10.w
+                                                          ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r13.xyz, r3.x, t0.xyzx
+                                                          and r3.x, r3.z, l(31)
+                                                          ushr r12.zw, r13.xxxy, r3.zzzz
+                                                          ult r3.y, l(0), r3.x
+                                                          iadd r3.x, -r3.x, l(32)
+                                                          ishl r13.xy, r13.yzyy, r3.xxxx
+                                                          and r3.xy, r3.yyyy, r13.xyxx
+                                                          or r11.zw, r3.yyyx, r12.wwwz
+                                                          imin r21.x, r2.w, l(97)
+                                                          mov r12.x, r11.w
+                                                          mov r21.yz, l(0,0,32,0)
+                                                        else
+                                                          mov r21.z, l(18)
+                                                        endif
+                                                        iadd r12.y, r34.z, r21.y
+                                                        iadd r2.w, r21.x, l(-14)
+                                                        ilt r2.w, r2.w, l(14)
+                                                        if_nz r2.w
+                                                          iadd r2.w, r3.z, r12.y
+                                                          ishr r3.x, r2.w, l(5)
+                                                          ishl r3.x, r3.x, l(2)
+                                                          iadd r3.x, r3.x, r10.w
+                                                          ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r3.xy, r3.x, t0.xyxx
+                                                          and r3.z, r2.w, l(31)
+                                                          ushr r2.w, r3.x, r2.w
+                                                          ult r3.x, l(0), r3.z
+                                                          iadd r3.z, -r3.z, l(32)
+                                                          ishl r3.y, r3.y, r3.z
+                                                          and r3.x, r3.y, r3.x
+                                                          or r3.x, r2.w, r3.x
+                                                          mov r3.y, l(0)
+                                                        else
+                                                          iadd r2.w, r21.z, l(-14)
+                                                          ilt r2.w, r2.w, l(14)
+                                                          ushr r3.z, r12.x, r12.y
+                                                          ult r5.w, l(0), r12.y
+                                                          iadd r8.w, -r12.y, l(32)
+                                                          ishl r8.w, r11.z, r8.w
+                                                          and r5.w, r5.w, r8.w
+                                                          or r13.x, r3.z, r5.w
+                                                          mov r13.y, l(0)
+                                                          movc r3.xy, r2.wwww, r13.xyxx, r12.xyxx
+                                                        endif
+                                                        ubfe r2.w, r34.w, r3.y, r3.x
+                                                        iadd r2.w, r32.z, r2.w
+                                                        utof r2.w, r2.w
+                                                        mul r2.w, r2.w, l(0.0000610388815)
+                                                      else
+                                                        utof r3.x, r32.z
+                                                        mul r2.w, r3.x, l(0.0000610388815)
+                                                      endif
+                                                      mad r3.xyz, r2.wwww, l(-52.889034, -21.545273, 110.517464, 0.000000), l(218.763718, 67.521507, -305.204590, 0.000000)
+                                                      mad r3.xyz, r2.wwww, r3.xyzx, l(-334.835144, -69.317497, 288.585876, 0.000000)
+                                                      mad r3.xyz, r2.wwww, r3.xyzx, l(228.766083, 25.049868, -91.541054, 0.000000)
+                                                      mad r3.xyz, r2.wwww, r3.xyzx, l(-66.094025, -4.927983, -10.094394, 0.000000)
+                                                      mad r3.xyz, r2.wwww, r3.xyzx, l(6.71641970, 3.18228674, 7.57158136, 0.000000)
+                                                      mad o5.xyz, r2.wwww, r3.xyzx, l(0.114089012, 0.0628834069, 0.224833727, 0.000000)
+                                                      mov o5.w, l(1.000000)
+                                                    else
+                                                      ieq r2.w, cb0[0].x, l(28)
+                                                      if_nz r2.w
+                                                        if_nz r22.y
+                                                          ishr r2.w, r14.w, l(5)
+                                                          ishl r2.w, r2.w, l(2)
+                                                          iadd r2.w, r2.w, r10.w
+                                                          ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r12.xyzw, r2.w, t0.xyzw
+                                                          and r2.w, r14.w, l(31)
+                                                          ushr r13.xyzw, r12.xyzw, r14.wwww
+                                                          ult r3.x, l(0), r2.w
+                                                          iadd r2.w, -r2.w, l(32)
+                                                          ishl r12.xyz, r12.yzwy, r2.wwww
+                                                          and r3.xyz, r3.xxxx, r12.xyzx
+                                                          or r3.xyz, r3.xyzx, r13.xyzx
+                                                          imad r14.w, r10.x, r11.x, r35.x
+                                                          ushr r11.xzw, r3.xxyz, r35.xxxx
+                                                          ult r2.w, l(0), r35.x
+                                                          iadd r3.x, -r35.x, l(32)
+                                                          ishl r3.yz, r3.yyzy, r3.xxxx
+                                                          and r3.yz, r2.wwww, r3.yyzy
+                                                          or r12.xy, r3.yzyy, r11.xzxx
+                                                          ishl r3.x, r13.w, r3.x
+                                                          and r2.w, r2.w, r3.x
+                                                          or r2.w, r2.w, r11.w
+                                                          iadd r12.z, r26.z, r34.y
+                                                          mov r3.xy, l(41,56,0,0)
+                                                        else
+                                                          mov r12.xyz, l(0,0,0,0)
+                                                          mov r2.w, l(0)
+                                                          mov r3.xy, l(0,112,0,0)
+                                                        endif
+                                                        if_nz r22.x
+                                                          ilt r3.z, r3.x, l(14)
+                                                          if_nz r3.z
+                                                            iadd r13.x, r12.z, r14.w
+                                                            ishr r3.z, r13.x, l(5)
+                                                            ishl r3.z, r3.z, l(2)
+                                                            iadd r3.z, r3.z, r10.w
+                                                            ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r15.xyzw, r3.z, t0.xyzw
+                                                            and r3.z, r13.x, l(31)
+                                                            ushr r11.xzw, r15.xxyz, r13.xxxx
+                                                            ult r5.w, l(0), r3.z
+                                                            iadd r3.z, -r3.z, l(32)
+                                                            ishl r14.xyz, r15.yzwy, r3.zzzz
+                                                            and r14.xyz, r5.wwww, r14.xyzx
+                                                            ilt r3.z, l(64), r3.y
+                                                            or r13.yzw, r11.xxzw, r14.xxyz
+                                                            movc r2.w, r3.z, r13.w, r2.w
+                                                            imin r3.x, r3.y, l(97)
+                                                          else
+                                                            iadd r13.x, r12.z, r14.w
+                                                            ushr r10.xy, r12.xyxx, r12.zzzz
+                                                            ult r3.z, l(0), r12.z
+                                                            iadd r5.w, -r12.z, l(32)
+                                                            ishl r8.w, r12.y, r5.w
+                                                            and r8.w, r3.z, r8.w
+                                                            or r13.y, r8.w, r10.x
+                                                            ilt r8.w, l(32), r3.x
+                                                            ishl r5.w, r2.w, r5.w
+                                                            and r3.z, r3.z, r5.w
+                                                            or r3.z, r3.z, r10.y
+                                                            movc r13.z, r8.w, r3.z, r12.y
+                                                          endif
+                                                          iadd r21.x, r3.x, l(-14)
+                                                          ilt r3.x, r21.x, l(14)
+                                                          if_nz r3.x
+                                                            iadd r3.x, r3.y, l(-14)
+                                                            iadd r13.x, r21.y, r13.x
+                                                            ishr r3.z, r13.x, l(5)
+                                                            ishl r3.z, r3.z, l(2)
+                                                            iadd r3.z, r3.z, r10.w
+                                                            ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r12.xyzw, r3.z, t0.xyzw
+                                                            and r3.z, r13.x, l(31)
+                                                            ushr r11.xzw, r12.xxyz, r13.xxxx
+                                                            ult r5.w, l(0), r3.z
+                                                            iadd r3.z, -r3.z, l(32)
+                                                            ishl r12.xyz, r12.yzwy, r3.zzzz
+                                                            and r12.xyz, r5.wwww, r12.xyzx
+                                                            ilt r3.z, l(64), r3.x
+                                                            or r13.yzw, r11.xxzw, r12.xxyz
+                                                            movc r2.w, r3.z, r13.w, r2.w
+                                                            imin r21.x, r3.x, l(97)
+                                                            mov r21.yz, l(0,0,32,0)
+                                                          else
+                                                            mov r21.z, l(18)
+                                                          endif
+                                                          iadd r3.x, r34.z, r21.y
+                                                          iadd r12.y, r21.x, l(-14)
+                                                          iadd r14.y, r3.y, l(-28)
+                                                          ilt r3.y, r12.y, l(14)
+                                                          if_nz r3.y
+                                                            iadd r3.y, r3.x, r13.x
+                                                            ishr r5.w, r3.y, l(5)
+                                                            ishl r5.w, r5.w, l(2)
+                                                            iadd r5.w, r5.w, r10.w
+                                                            ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r11.xzw, r5.w, t0.xxyz
+                                                            and r5.w, r3.y, l(31)
+                                                            ushr r10.xy, r11.xzxx, r3.yyyy
+                                                            ult r8.w, l(0), r5.w
+                                                            iadd r5.w, -r5.w, l(32)
+                                                            ishl r11.xz, r11.zzwz, r5.wwww
+                                                            and r11.xz, r8.wwww, r11.xxzx
+                                                            ilt r5.w, l(32), r14.y
+                                                            or r11.xz, r10.xxyx, r11.xxzx
+                                                            movc r11.w, r5.w, r11.z, r13.z
+                                                            imin r14.z, r14.y, l(32)
+                                                            mov r14.x, l(0)
+                                                            mov r12.xyz, r14.xyzx
+                                                          else
+                                                            iadd r3.z, r21.z, l(-14)
+                                                            ilt r5.w, r3.z, l(14)
+                                                            iadd r15.x, r3.x, r13.x
+                                                            ushr r10.xy, r13.yzyy, r3.xxxx
+                                                            ult r8.w, l(0), r3.x
+                                                            iadd r9.y, -r3.x, l(32)
+                                                            ishl r12.w, r13.z, r9.y
+                                                            and r12.w, r8.w, r12.w
+                                                            or r15.y, r10.x, r12.w
+                                                            ilt r10.x, l(32), r12.y
+                                                            ishl r2.w, r2.w, r9.y
+                                                            and r2.w, r2.w, r8.w
+                                                            or r2.w, r2.w, r10.y
+                                                            movc r15.z, r10.x, r2.w, r13.z
+                                                            imin r14.z, r14.y, l(32)
+                                                            movc r11.xzw, r5.wwww, r15.yyxz, r13.yyxz
+                                                            mov r14.x, l(0)
+                                                            movc r12.xz, r5.wwww, r14.xxzx, r3.xxzx
+                                                            mov r3.y, r11.z
+                                                          endif
+                                                          iadd r11.z, r34.w, r12.x
+                                                          iadd r2.w, r12.y, l(-14)
+                                                          ilt r2.w, r2.w, l(14)
+                                                          if_nz r2.w
+                                                            iadd r2.w, r3.y, r11.z
+                                                            ishr r3.x, r2.w, l(5)
+                                                            ishl r3.x, r3.x, l(2)
+                                                            iadd r3.x, r3.x, r10.w
+                                                            ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r3.xy, r3.x, t0.xyxx
+                                                            and r3.z, r2.w, l(31)
+                                                            ushr r2.w, r3.x, r2.w
+                                                            ult r3.x, l(0), r3.z
+                                                            iadd r3.z, -r3.z, l(32)
+                                                            ishl r3.y, r3.y, r3.z
+                                                            and r3.x, r3.y, r3.x
+                                                            or r3.x, r2.w, r3.x
+                                                            mov r3.y, l(0)
+                                                          else
+                                                            iadd r2.w, r12.z, l(-14)
+                                                            ilt r2.w, r2.w, l(14)
+                                                            and r3.z, r11.z, l(31)
+                                                            ushr r5.w, r11.x, r11.z
+                                                            ult r8.w, l(0), r3.z
+                                                            iadd r3.z, -r3.z, l(32)
+                                                            ishl r3.z, r11.w, r3.z
+                                                            and r3.z, r3.z, r8.w
+                                                            or r10.x, r3.z, r5.w
+                                                            mov r10.y, l(0)
+                                                            movc r3.xy, r2.wwww, r10.xyxx, r11.xzxx
+                                                          endif
+                                                          ubfe r2.w, r26.w, r3.y, r3.x
+                                                          iadd r2.w, r32.w, r2.w
+                                                          utof r2.w, r2.w
+                                                          mul r2.w, r2.w, l(0.0000610388815)
+                                                        else
+                                                          utof r3.x, r32.w
+                                                          mul r2.w, r3.x, l(0.0000610388815)
+                                                        endif
+                                                        mad r3.xyz, r2.wwww, l(-52.889034, -21.545273, 110.517464, 0.000000), l(218.763718, 67.521507, -305.204590, 0.000000)
+                                                        mad r3.xyz, r2.wwww, r3.xyzx, l(-334.835144, -69.317497, 288.585876, 0.000000)
+                                                        mad r3.xyz, r2.wwww, r3.xyzx, l(228.766083, 25.049868, -91.541054, 0.000000)
+                                                        mad r3.xyz, r2.wwww, r3.xyzx, l(-66.094025, -4.927983, -10.094394, 0.000000)
+                                                        mad r3.xyz, r2.wwww, r3.xyzx, l(6.71641970, 3.18228674, 7.57158136, 0.000000)
+                                                        mad o5.xyz, r2.wwww, r3.xyzx, l(0.114089012, 0.0628834069, 0.224833727, 0.000000)
+                                                        mov o5.w, l(1.000000)
+                                                      else
+                                                        ieq r2.w, cb0[0].x, l(29)
+                                                        if_nz r2.w
+                                                          iadd r2.w, cb0[2].x, l(1)
+                                                          ushr r3.x, r2.w, l(16)
+                                                          xor r2.w, r2.w, r3.x
+                                                          imul null, r2.w, r2.w, l(0x85ebca6b)
+                                                          ushr r3.x, r2.w, l(13)
+                                                          xor r2.w, r2.w, r3.x
+                                                          imul null, r2.w, r2.w, l(0xc2b2ae35)
+                                                          ushr r3.x, r2.w, l(16)
+                                                          xor r2.w, r2.w, r3.x
+                                                          and r3.x, r2.w, l(255)
+                                                          ubfe r3.yz, l(0, 8, 8, 0), l(0, 8, 16, 0), r2.wwww
+                                                          utof r12.xyz, r3.xyzx
+                                                          mul o5.xyz, r12.xyzx, l(0.00392156886, 0.00392156886, 0.00392156886, 0.000000)
+                                                          mov o5.w, l(0.00392156886)
+                                                        else
+                                                          imad r2.w, r2.z, l(96), l(64)
+                                                          iadd r2.w, r2.w, l(12)
+                                                          ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r2.w, r2.w, t3.xxxx
+                                                          ieq r3.x, cb0[0].x, l(30)
+                                                          if_nz r3.x
+                                                            div r3.x, r2.w, cb0[1].w
+                                                            movc r3.x, r16.x, r3.x, r2.w
+                                                            mul r3.x, r3.x, l(10.000000)
+                                                            round_ne r3.x, r3.x
+                                                            ftou r3.x, r3.x
+                                                            ubfe r3.yz, l(0, 8, 8, 0), l(0, 16, 8, 0), r3.xxxx
+                                                            utof r12.xy, r3.yzyy
+                                                            and r3.y, r3.x, l(255)
+                                                            ushr r3.x, r3.x, l(24)
+                                                            utof r12.zw, r3.yyyx
+                                                            mul o5.xyzw, r12.xyzw, l(0.00392156886, 0.00392156886, 0.00392156886, 0.00392156886)
+                                                          else
+                                                            ieq r3.x, cb0[0].x, l(31)
+                                                            if_nz r3.x
+                                                              mul r2.w, r2.w, l(10.000000)
+                                                              round_ne r2.w, r2.w
+                                                              ftou r2.w, r2.w
+                                                              ubfe r3.xy, l(8, 8, 0, 0), l(16, 8, 0, 0), r2.wwww
+                                                              utof r12.xy, r3.xyxx
+                                                              and r3.x, r2.w, l(255)
+                                                              utof r12.z, r3.x
+                                                              ushr r2.w, r2.w, l(24)
+                                                              utof r12.w, r2.w
+                                                              mul o5.xyzw, r12.xyzw, l(0.00392156886, 0.00392156886, 0.00392156886, 0.00392156886)
+                                                            else
+                                                              ieq r12.xyzw, cb0[0].xxxx, l(42, 43, 44, 45)
+                                                              or r2.w, r12.y, r12.x
+                                                              or r2.w, r12.z, r2.w
+                                                              or r2.w, r12.w, r2.w
+                                                              if_nz r2.w
+                                                                imad r2.z, r2.z, l(96), l(80)
+                                                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r13.xyzw, r2.z, t3.xyzw
+                                                                movc r2.z, r12.w, r13.w, r13.x
+                                                                movc r2.z, r12.z, r13.z, r2.z
+                                                                movc r2.z, r12.y, r13.y, r2.z
+                                                                ubfe r3.xy, l(8, 8, 0, 0), l(16, 8, 0, 0), r2.zzzz
+                                                                utof r12.xy, r3.xyxx
+                                                                and r2.w, r2.z, l(255)
+                                                                ushr r2.z, r2.z, l(24)
+                                                                utof r12.zw, r2.wwwz
+                                                                mul o5.xyzw, r12.xyzw, l(0.00392156886, 0.00392156886, 0.00392156886, 0.00392156886)
+                                                              else
+                                                                ld_raw_indexable(raw_buffer)(mixed,mixed,mixed,mixed) r2.zw, r11.y, t3.xxxy
+                                                                ieq r3.x, cb0[0].x, l(32)
+                                                                if_nz r3.x
+                                                                  imul null, r2.z, r2.z, l(10)
+                                                                  ubfe r3.xy, l(8, 8, 0, 0), l(16, 8, 0, 0), r2.zzzz
+                                                                  utof r11.xy, r3.xyxx
+                                                                  and r3.x, r2.z, l(254)
+                                                                  utof r11.z, r3.x
+                                                                  ushr r2.z, r2.z, l(24)
+                                                                  utof r11.w, r2.z
+                                                                  mul o5.xyzw, r11.xyzw, l(0.00392156886, 0.00392156886, 0.00392156886, 0.00392156886)
+                                                                else
+                                                                  imul null, r2.z, r2.w, l(10)
+                                                                  ubfe r3.xy, l(8, 8, 0, 0), l(16, 8, 0, 0), r2.zzzz
+                                                                  utof r11.xy, r3.xyxx
+                                                                  and r2.w, r2.z, l(254)
+                                                                  ushr r2.z, r2.z, l(24)
+                                                                  utof r11.zw, r2.wwwz
+                                                                  mul r11.xyzw, r11.xyzw, l(0.00392156886, 0.00392156886, 0.00392156886, 0.00392156886)
+                                                                  ieq r2.zw, cb0[0].xxxx, l(0, 0, 33, 34)
+                                                                  imul null, r3.x, r10.z, l(10)
+                                                                  ubfe r3.yz, l(0, 8, 8, 0), l(0, 16, 8, 0), r3.xxxx
+                                                                  utof r10.xy, r3.yzyy
+                                                                  and r3.y, r3.x, l(254)
+                                                                  ushr r3.x, r3.x, l(24)
+                                                                  utof r10.zw, r3.yyyx
+                                                                  mul r10.xyzw, r10.xyzw, l(0.00392156886, 0.00392156886, 0.00392156886, 0.00392156886)
+                                                                  movc r10.xyzw, r2.wwww, r10.xyzw, l(1.000000,1.000000,1.000000,1.000000)
+                                                                  movc o5.xyzw, r2.zzzz, r11.xyzw, r10.xyzw
+                                                                endif
+                                                              endif
+                                                            endif
+                                                          endif
+                                                        endif
+                                                      endif
+                                                    endif
+                                                  endif
+                                                endif
+                                              endif
+                                            endif
+                                          endif
+                                        endif
+                                      endif
+                                    endif
+                                  endif
+                                endif
+                              endif
+                            endif
+                          endif
+                        endif
+                      endif
+                    endif
+                  endif
+                endif
+              endif
+            endif
+          endif
+        endif
+      endif
+    endif
+  endif
+  utof r0.w, r3.w
+  ld_structured_indexable(structured_buffer, stride=36)(mixed,mixed,mixed,mixed) r30.z, r3.w, l(28), t8.xxxx
+  sample_l_indexable(texture2darray)(float,float,float,float) r2.z, r30.xyzx, t4.xyzw, s0, l(1.000000)
+  ge r2.w, r30.z, l(0.000000)
+  movc r1.w, r2.w, r2.z, l(1.000000)
+  mov r3.x, r4.w
+  mov r3.y, r6.w
+  mov r3.z, r7.w
+  add r3.xyw, r3.xyxz, -cb1[44].xyxz
+  mov r4.w, r3.x
+  mov r39.w, l(1.000000)
+  dp4 r0.x, r4.xyzw, r39.xyzw
+  mov r6.w, r3.y
+  dp4 r0.y, r6.xyzw, r39.xyzw
+  mov r3.xyz, r7.xyzx
+  dp4 r0.z, r3.xyzw, r39.xyzw
+  mov r7.x, r5.x
+  mov r7.y, r8.x
+  mov r7.z, r9.x
+  dp3 r7.x, r23.xyzx, r7.xyzx
+  mov r10.x, r5.y
+  mov r10.y, r8.y
+  mov r10.z, r9.z
+  dp3 r7.y, r23.xyzx, r10.xyzx
+  mov r9.x, r5.z
+  mov r9.z, r8.z
+  dp3 r7.z, r23.xyzx, r9.xzwx
+  dp3 r2.z, r7.xyzx, r7.xyzx
+  max r2.z, r2.z, l(1.175494351E-38)
+  rsq r2.z, r2.z
+  mul r1.xyz, r2.zzzz, r7.xyzx
+  dp3 r4.x, r4.xyzx, r27.xyzx
+  dp3 r4.y, r6.xyzx, r27.xyzx
+  dp3 r4.z, r3.xyzx, r27.xyzx
+  dp3 r2.z, r4.xyzx, r4.xyzx
+  max r2.z, r2.z, l(1.175494351E-38)
+  rsq r2.z, r2.z
+  mul o1.xyz, r2.zzzz, r4.xyzx
+  mul r3.xyzw, r0.yyyy, cb1[21].xyzw
+  mad r3.xyzw, cb1[20].xyzw, r0.xxxx, r3.xyzw
+  mad r3.xyzw, cb1[22].xyzw, r0.zzzz, r3.xyzw
+  add o0.xyzw, r3.xyzw, cb1[23].xyzw
+  mov r29.zw, v3.zzzw
+  mov o2.xyzw, r29.xyzw
+  mov o3.xy, r30.xyxx
+  mov o3.zw, v4.zzzw
+  mov r31.zw, v5.zzzw
+  mov o4.xyzw, r31.xyzw
+  mov r2.x, v7.x
+endif
+mov o6.xyzw, r0.xyzw
+mov o7.xyzw, r1.xyzw
+mov o8.xy, r2.xyxx
+ret
