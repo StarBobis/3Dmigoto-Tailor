@@ -135,7 +135,7 @@ class FrameAnalysis:
 
 if __name__ == "__main__":
     # 解限机-机甲-测试
-    frameanalysis_folder = r"C:\Users\Administrator\Desktop\net8.0-windows10.0.22621.0\Games\Game001\3Dmigoto\FrameAnalysis-2025-02-26-101855"
+    frameanalysis_folder = r"C:\Users\Administrator\Desktop\net8.0-windows10.0.22621.0\Games\Game001\3Dmigoto\FrameAnalysis-2025-02-28-115121"
     fa = FrameAnalysis(frameanalysis_folder)
 
     draw_ib = "c3ddbf5a"
@@ -225,8 +225,22 @@ if __name__ == "__main__":
         一部分Shader负责UV贴图，当然这个只是猜测，具体还得进游戏Dump Shader来查看。
         '''
         
-    
 
+    '''
+    进入游戏测试发现，果然每个VS都只负责一部分信息，有的负责场景，有的负责机甲，它们都在一个IndexBuffer里。。。
+    所以对于不同类型的模型，要编写不同类型的脚本才行。
+
+    既然机甲的模型和场景的模型使用的Shader是不同的，那么现在先关注机甲的模型提取。
+
+    经过测试vs为4c9cec64b0195573的Shader dump下来光ASM就有3000行，加上解析失败的HLSL一共有6000行左右
+    为什么会这么大？
+    是提交的Buffer数据中含有加密数据，然后VertexShader中做了混淆解密处理吗？？？
+    如果真的做了混淆加密才传递到Buffer中，然后利用控制流混淆的代码进行解密，那即使能够使用偏移拿到正确的数据
+    后续解密的流程要如何还原，要如何把解混淆的ASM代码转换为python或者C++等代码，再实现一次呢。
+
+    但是这个VS就是控制机甲渲染的核心代码，其它的VS只是机甲身上的一些装饰，要提取模型就绕不过这个Shader的处理。
+    '''
+    
 
 
 
